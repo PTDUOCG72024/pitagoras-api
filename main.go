@@ -12,6 +12,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/joho/godotenv"
+	"github.com/xbizzybone/pitagoras-api/projects"
 	"github.com/xbizzybone/pitagoras-api/users"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -65,6 +66,7 @@ func main() {
 	app.Use(cors.New())
 
 	users.ApplyRoutes(app, zapLogger, usersCollection)
+	projects.ApplyRoutes(app, zapLogger, usersCollection)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
