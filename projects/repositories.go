@@ -2,7 +2,6 @@ package projects
 
 import (
 	"context"
-	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -23,9 +22,6 @@ func NewRepository(logger *zap.Logger, collection *mongo.Collection) Repository 
 }
 
 func (r *repository) CreateProject(ctx context.Context, project *Project) error {
-	project.CreatedAt = time.Now()
-	project.UpdatedAt = time.Now()
-
 	_, err := r.collection.InsertOne(ctx, project)
 	if err != nil {
 		r.logger.Sugar().Errorw(err.Error(), "func", "CreateProject", "request_id", ctx.Value("request_id"))
@@ -73,8 +69,6 @@ func (r *repository) GetProjects(ctx context.Context) ([]Project, error) {
 }
 
 func (r *repository) UpdateProject(ctx context.Context, project *Project) error {
-	project.UpdatedAt = time.Now()
-
 	_, err := r.collection.ReplaceOne(ctx, bson.M{"_id": project.ID}, project)
 	if err != nil {
 		r.logger.Sugar().Errorw(err.Error(), "func", "UpdateProject", "request_id", ctx.Value("request_id"))

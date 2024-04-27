@@ -25,4 +25,6 @@ func ApplyRoutes(app *fiber.App, logger *zap.Logger, mongoCollection *mongo.Coll
 	group.Put("/:id", ctrl.UpdateProject)
 	group.Delete("/:id", ctrl.DeleteProject)
 	group.Get("/", ctrl.GetProjects)
+	group.Put("/activate/:id", ctrl.ActivateProject)
+	group.Put("/deactivate/:id", ctrl.DeactivateProject)
 }

@@ -22,6 +22,7 @@ import (
 
 var client *mongo.Client
 var usersCollection *mongo.Collection
+var projectsCollection *mongo.Collection
 
 var zapLogger *zap.Logger
 
@@ -52,6 +53,7 @@ func init() {
 
 	dbName := os.Getenv("MONGO_DB_NAME")
 	usersCollection = client.Database(dbName).Collection(os.Getenv("MONGO_USERS_COLLECTION_NAME"))
+	projectsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_PROJECTS_COLLECTION_NAME"))
 	zapLogger.Info("MongoDB initialized")
 }
 
@@ -66,7 +68,7 @@ func main() {
 	app.Use(cors.New())
 
 	users.ApplyRoutes(app, zapLogger, usersCollection)
-	projects.ApplyRoutes(app, zapLogger, usersCollection)
+	projects.ApplyRoutes(app, zapLogger, projectsCollection)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }

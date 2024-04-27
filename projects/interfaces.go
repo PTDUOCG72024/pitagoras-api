@@ -12,6 +12,8 @@ type Controller interface {
 	GetProjects(ctx *fiber.Ctx) error
 	UpdateProject(ctx *fiber.Ctx) error
 	DeleteProject(ctx *fiber.Ctx) error
+	ActivateProject(ctx *fiber.Ctx) error
+	DeactivateProject(ctx *fiber.Ctx) error
 }
 
 type Cases interface {
@@ -20,6 +22,8 @@ type Cases interface {
 	GetProjects(ctx context.Context) ([]Project, error)
 	UpdateProject(ctx context.Context, id string, project *Project) error
 	DeleteProject(ctx context.Context, id string) error
+	ActivateProject(ctx context.Context, id string) error
+	DeactivateProject(ctx context.Context, id string) error
 }
 
 type Repository interface {

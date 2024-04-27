@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 )
 
@@ -22,6 +23,7 @@ func NewCases(logger *zap.Logger, repository Repository) Cases {
 func (c *cases) CreateProject(ctx context.Context, project *Project) (Project, error) {
 	project.CreatedAt = time.Now()
 	project.UpdatedAt = time.Now()
+	project.IsActive = true
 
 	if err := c.repository.CreateProject(ctx, project); err != nil {
 		return Project{}, err
@@ -75,9 +77,44 @@ func (c *cases) UpdateProject(ctx context.Context, id string, project *Project) 
 		return err
 	}
 
+	project.ID, _ = primitive.ObjectIDFromHex(id)
 	project.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdateProject(ctx, project); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (c *cases) ActivateProject(ctx context.Context, id string) error {
+	project, err := c.repository.GetProjectById(ctx, id)
+
+	if err != nil {
+		return err
+	}
+
+	project.IsActive = true
+	project.UpdatedAt = time.Now()
+
+	if err := c.repository.UpdateProject(ctx, &project); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (c *cases) DeactivateProject(ctx context.Context, id string) error {
+	project, err := c.repository.GetProjectById(ctx, id)
+
+	if err != nil {
+		return err
+	}
+
+	project.IsActive = false
+	project.UpdatedAt = time.Now()
+
+	if err := c.repository.UpdateProject(ctx, &project); err != nil {
 		return err
 	}
 

@@ -36,11 +36,13 @@ func (c *controller) CreateProject(ctx *fiber.Ctx) error {
 	}
 
 	projectResponse := new(CreateProjectResponse)
+	projectResponse.ID = createProject.ID
 	projectResponse.Name = createProject.Name
 	projectResponse.Description = createProject.Description
 	projectResponse.StartDate = createProject.StartDate
 	projectResponse.EndDate = createProject.EndDate
 	projectResponse.IsActive = createProject.IsActive
+	projectResponse.CreatedAt = createProject.CreatedAt
 
 	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Proyecto creado correctamente",
@@ -74,6 +76,7 @@ func (c *controller) GetProjectById(ctx *fiber.Ctx) error {
 	}
 
 	projectResponse := new(GetProjectResponse)
+	projectResponse.ID = project.ID
 	projectResponse.Name = project.Name
 	projectResponse.Description = project.Description
 	projectResponse.StartDate = project.StartDate
@@ -101,6 +104,7 @@ func (c *controller) GetProjects(ctx *fiber.Ctx) error {
 	projectsResponse := make([]GetProjectResponse, 0)
 	for _, project := range projects {
 		projectResponse := new(GetProjectResponse)
+		projectResponse.ID = project.ID
 		projectResponse.Name = project.Name
 		projectResponse.Description = project.Description
 		projectResponse.StartDate = project.StartDate
@@ -136,7 +140,6 @@ func (c *controller) UpdateProject(ctx *fiber.Ctx) error {
 	project.Description = requestBody.Description
 	project.StartDate = requestBody.StartDate
 	project.EndDate = requestBody.EndDate
-	project.IsActive = requestBody.IsActive
 
 	err := c.cases.UpdateProject(ctx.UserContext(), projectID, project)
 	if err != nil {
@@ -147,5 +150,35 @@ func (c *controller) UpdateProject(ctx *fiber.Ctx) error {
 
 	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Proyecto actualizado correctamente",
+	})
+}
+
+func (c *controller) ActivateProject(ctx *fiber.Ctx) error {
+	projectID := ctx.Params("id")
+
+	err := c.cases.ActivateProject(ctx.UserContext(), projectID)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Error activando el proyecto",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Proyecto activado correctamente",
+	})
+}
+
+func (c *controller) DeactivateProject(ctx *fiber.Ctx) error {
+	projectID := ctx.Params("id")
+
+	err := c.cases.DeactivateProject(ctx.UserContext(), projectID)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Error desactivando el proyecto",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Proyecto desactivado correctamente",
 	})
 }
