@@ -1,5 +1,67 @@
 basePath: /
 definitions:
+  projects.CreateProjectRequest:
+    properties:
+      description:
+        type: string
+      end_date:
+        type: string
+      name:
+        type: string
+      start_date:
+        type: string
+    type: object
+  projects.CreateProjectResponse:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      end_date:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+      start_date:
+        type: string
+    type: object
+  projects.GetProjectResponse:
+    properties:
+      created_at:
+        type: string
+      delete_at:
+        type: string
+      description:
+        type: string
+      end_date:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      start_date:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  projects.UpdateProjectRequest:
+    properties:
+      description:
+        type: string
+      end_date:
+        type: string
+      name:
+        type: string
+      start_date:
+        type: string
+    type: object
   users.UserCreateRequest:
     properties:
       email:
@@ -93,7 +155,7 @@ definitions:
       password:
         type: string
     type: object
-host: https://pitagoras-api-production.up.railway.app
+host: pitagoras-api-production.up.railway.app
 info:
   contact:
     email: fiber@swagger.io
@@ -178,6 +240,189 @@ paths:
       summary: register new user
       tags:
       - users
+  /projects:
+    get:
+      consumes:
+      - application/json
+      description: Get all projects
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/projects.GetProjectResponse'
+            type: array
+        "500":
+          description: Error obteniendo los proyectos
+          schema:
+            type: string
+      summary: Get all projects
+      tags:
+      - projects
+    post:
+      consumes:
+      - application/json
+      description: Create a new project
+      parameters:
+      - description: Project object that needs to be created
+        in: body
+        name: project
+        required: true
+        schema:
+          $ref: '#/definitions/projects.CreateProjectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/projects.CreateProjectResponse'
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error creando el proyecto
+          schema:
+            type: string
+      summary: Create a new project
+      tags:
+      - projects
+  /projects/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Proyecto eliminado correctamente
+          schema:
+            type: string
+        "500":
+          description: Error eliminando el proyecto
+          schema:
+            type: string
+      summary: Delete a project
+      tags:
+      - projects
+    get:
+      consumes:
+      - application/json
+      description: Get a project by id
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/projects.GetProjectResponse'
+        "500":
+          description: Error obteniendo el proyecto
+          schema:
+            type: string
+      summary: Get a project by id
+      tags:
+      - projects
+    put:
+      consumes:
+      - application/json
+      description: Update a project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Project object that needs to be updated
+        in: body
+        name: project
+        required: true
+        schema:
+          $ref: '#/definitions/projects.UpdateProjectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Proyecto actualizado correctamente
+          schema:
+            type: string
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error actualizando el proyecto
+          schema:
+            type: string
+      summary: Update a project
+      tags:
+      - projects
+  /projects/activate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Activate a project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Proyecto activado correctamente
+          schema:
+            type: string
+        "500":
+          description: Error activando el proyecto
+          schema:
+            type: string
+      summary: Activate a project
+      tags:
+      - projects
+  /projects/deactivate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Deactivate a project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Proyecto desactivado correctamente
+          schema:
+            type: string
+        "500":
+          description: Error desactivando el proyecto
+          schema:
+            type: string
+      summary: Deactivate a project
+      tags:
+      - projects
   /users/{id}:
     get:
       consumes:

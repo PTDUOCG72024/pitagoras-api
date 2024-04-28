@@ -13,6 +13,17 @@ func NewController(cases Cases) Controller {
 	return &controller{cases}
 }
 
+// CreateProject godoc
+// @Summary Create a new project
+// @Description Create a new project
+// @Tags projects
+// @Accept json
+// @Produce json
+// @Param project body CreateProjectRequest true "Project object that needs to be created"
+// @Success 200 {object} CreateProjectResponse
+// @Failure 400 {string} string "Error validando el cuerpo de la petición"
+// @Failure 500 {string} string "Error creando el proyecto"
+// @Router /projects [post]
 func (c *controller) CreateProject(ctx *fiber.Ctx) error {
 	requestBody := new(CreateProjectRequest)
 
@@ -50,6 +61,16 @@ func (c *controller) CreateProject(ctx *fiber.Ctx) error {
 	})
 }
 
+// DeleteProject godoc
+// @Summary Delete a project
+// @Description Delete a project
+// @Tags projects
+// @Accept json
+// @Produce json
+// @Param id path string true "Project ID"
+// @Success 200 {string} string "Proyecto eliminado correctamente"
+// @Failure 500 {string} string "Error eliminando el proyecto"
+// @Router /projects/{id} [delete]
 func (c *controller) DeleteProject(ctx *fiber.Ctx) error {
 	projectID := ctx.Params("id")
 
@@ -65,6 +86,16 @@ func (c *controller) DeleteProject(ctx *fiber.Ctx) error {
 	})
 }
 
+// GetProjectById godoc
+// @Summary Get a project by id
+// @Description Get a project by id
+// @Tags projects
+// @Accept json
+// @Produce json
+// @Param id path string true "Project ID"
+// @Success 200 {object} GetProjectResponse
+// @Failure 500 {string} string "Error obteniendo el proyecto"
+// @Router /projects/{id} [get]
 func (c *controller) GetProjectById(ctx *fiber.Ctx) error {
 	projectID := ctx.Params("id")
 
@@ -93,6 +124,15 @@ func (c *controller) GetProjectById(ctx *fiber.Ctx) error {
 	})
 }
 
+// GetProjects godoc
+// @Summary Get all projects
+// @Description Get all projects
+// @Tags projects
+// @Accept json
+// @Produce json
+// @Success 200 {object} []GetProjectResponse
+// @Failure 500 {string} string "Error obteniendo los proyectos"
+// @Router /projects [get]
 func (c *controller) GetProjects(ctx *fiber.Ctx) error {
 	projects, err := c.cases.GetProjects(ctx.UserContext())
 	if err != nil {
@@ -124,6 +164,18 @@ func (c *controller) GetProjects(ctx *fiber.Ctx) error {
 	})
 }
 
+// UpdateProject godoc
+// @Summary Update a project
+// @Description Update a project
+// @Tags projects
+// @Accept json
+// @Produce json
+// @Param id path string true "Project ID"
+// @Param project body UpdateProjectRequest true "Project object that needs to be updated"
+// @Success 200 {string} string "Proyecto actualizado correctamente"
+// @Failure 400 {string} string "Error validando el cuerpo de la petición"
+// @Failure 500 {string} string "Error actualizando el proyecto"
+// @Router /projects/{id} [put]
 func (c *controller) UpdateProject(ctx *fiber.Ctx) error {
 	projectID := ctx.Params("id")
 
@@ -153,6 +205,16 @@ func (c *controller) UpdateProject(ctx *fiber.Ctx) error {
 	})
 }
 
+// ActivateProject godoc
+// @Summary Activate a project
+// @Description Activate a project
+// @Tags projects
+// @Accept json
+// @Produce json
+// @Param id path string true "Project ID"
+// @Success 200 {string} string "Proyecto activado correctamente"
+// @Failure 500 {string} string "Error activando el proyecto"
+// @Router /projects/activate/{id} [put]
 func (c *controller) ActivateProject(ctx *fiber.Ctx) error {
 	projectID := ctx.Params("id")
 
@@ -168,6 +230,16 @@ func (c *controller) ActivateProject(ctx *fiber.Ctx) error {
 	})
 }
 
+// DeactivateProject godoc
+// @Summary Deactivate a project
+// @Description Deactivate a project
+// @Tags projects
+// @Accept json
+// @Produce json
+// @Param id path string true "Project ID"
+// @Success 200 {string} string "Proyecto desactivado correctamente"
+// @Failure 500 {string} string "Error desactivando el proyecto"
+// @Router /projects/deactivate/{id} [put]
 func (c *controller) DeactivateProject(ctx *fiber.Ctx) error {
 	projectID := ctx.Params("id")
 

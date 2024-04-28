@@ -68,7 +68,7 @@ func init() {
 // @contact.email fiber@swagger.io
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host https://pitagoras-api-production.up.railway.app
+// @host pitagoras-api-production.up.railway.app
 // @BasePath /
 func main() {
 	defer zapLogger.Sync()
