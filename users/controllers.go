@@ -13,6 +13,20 @@ func NewController(cases Cases) Controller {
 	return &controller{cases}
 }
 
+// Register godoc
+//
+//	@Summary		register new user
+//	@Description 	register new user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			body body UserCreateRequest true "UserCreateRequest"
+//	@Success		200 {object} UserCreateResponse
+//	@Failure		400 {string} string "Error validando el cuerpo de la petición"
+//	@Failure		409 {string} string "El usuario ya existe"
+//	@Failure		500 {string} string "Error encriptando la contraseña"
+//	@Failure		500 {string} string "Error creando el usuario"
+//	@Router			/auth/register [post]
 func (c *controller) Register(ctx *fiber.Ctx) error {
 	requestBody := new(UserCreateRequest)
 
@@ -57,6 +71,21 @@ func (c *controller) Register(ctx *fiber.Ctx) error {
 	})
 }
 
+// Login godoc
+//
+//	@Summary		login user
+//	@Description 	login user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			body body UserRequest true "UserRequest"
+//	@Success		200 {object} UserLoginResponse
+//	@Failure		400 {string} string "Error validando el cuerpo de la petición"
+//	@Failure		404 {string} string "El usuario no existe"
+//	@Failure		401 {string} string "Contraseña incorrecta"
+//	@Failure		500 {string} string "Error iniciando sesión"
+//	@Failure		401 {string} string "Cuenta de usuario deshabilitada"
+//	@Router			/auth/login [post]
 func (c *controller) Login(ctx *fiber.Ctx) error {
 	requestBody := new(UserRequest)
 
@@ -106,6 +135,19 @@ func (c *controller) Login(ctx *fiber.Ctx) error {
 	return ctx.Status(fiber.StatusOK).JSON(response)
 }
 
+// GetUserById godoc
+//
+//	@Summary		get user by id
+//	@Description 	get user by id
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			id path string true "User ID"
+//	@Success		200 {object} UserResponse
+//	@Failure		400 {string} string "Usuario no existe"
+//	@Failure		404 {string} string "El usuario no existe"
+//	@Failure		500 {string} string "Error obteniendo el usuario"
+//	@Router			/users/{id} [get]
 func (c *controller) GetUserById(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 	userResult, err := c.cases.GetUserById(ctx.UserContext(), id)
@@ -140,6 +182,18 @@ func (c *controller) GetUserById(ctx *fiber.Ctx) error {
 	return ctx.Status(fiber.StatusOK).JSON(response)
 }
 
+// GetUserByEmail godoc
+//
+//	@Summary		get user by email
+//	@Description 	get user by email
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			email path string true "User Email"
+//	@Success		200 {object} UserResponse
+//	@Failure		404 {string} string "El usuario no existe"
+//	@Failure		500 {string} string "Error obteniendo el usuario"
+//	@Router			/users/email/{email} [get]
 func (c *controller) GetUserByEmail(ctx *fiber.Ctx) error {
 	email := ctx.Params("email")
 
@@ -169,6 +223,19 @@ func (c *controller) GetUserByEmail(ctx *fiber.Ctx) error {
 	return ctx.Status(fiber.StatusOK).JSON(response)
 }
 
+// Deactivate godoc
+//
+//	@Summary		deactivate user
+//	@Description 	deactivate user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			id path string true "User ID"
+//	@Success		200 {string} string "Usuario desactivado correctamente"
+//	@Failure		400 {string} string "Usuario no existe"
+//	@Failure		404 {string} string "El usuario no existe"
+//	@Failure		500 {string} string "Error eliminando el usuario"
+//	@Router			/users/deactivate/{id} [put]
 func (c *controller) Deactivate(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 
@@ -196,6 +263,19 @@ func (c *controller) Deactivate(ctx *fiber.Ctx) error {
 	})
 }
 
+// Activate godoc
+//
+//	@Summary		activate user
+//	@Description 	activate user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			id path string true "User ID"
+//	@Success		200 {string} string "Usuario activado correctamente"
+//	@Failure		400 {string} string "Usuario no existe"
+//	@Failure		404 {string} string "El usuario no existe"
+//	@Failure		500 {string} string "Error activando el usuario"
+//	@Router			/users/activate/{id} [put]
 func (c *controller) Activate(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 
@@ -223,6 +303,20 @@ func (c *controller) Activate(ctx *fiber.Ctx) error {
 	})
 }
 
+// Update godoc
+//
+//	@Summary		update user
+//	@Description 	update user
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Param			id path string true "User ID"
+//	@Param			body body UserUpdateRequest true "UserUpdateRequest"
+//	@Success		200 {string} string "Usuario actualizado correctamente"
+//	@Failure		400 {string} string "Usuario no existe"
+//	@Failure		404 {string} string "El usuario no existe"
+//	@Failure		500 {string} string "Error actualizando el usuario"
+//	@Router			/users/{id} [put]
 func (c *controller) Update(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 	requestBody := new(UserUpdateRequest)

@@ -5,7 +5,6 @@ import (
 	"errors"
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -55,7 +54,7 @@ func (c *cases) Login(ctx context.Context, user *User) (User, error) {
 		return User{}, errors.New("invalid password")
 	}
 
-	result.LastLogin = primitive.NewDateTimeFromTime(time.Now())
+	result.LastLogin = time.Now()
 	if err = c.repository.UpdateUser(ctx, &result); err != nil {
 		return User{}, errors.New("error while updating user")
 	}

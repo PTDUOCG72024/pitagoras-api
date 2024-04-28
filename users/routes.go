@@ -20,11 +20,11 @@ func bootstrap(logger *zap.Logger, mongoCollection *mongo.Collection) {
 func ApplyRoutes(app *fiber.App, logger *zap.Logger, mongoCollection *mongo.Collection) {
 	bootstrap(logger, mongoCollection)
 	group := app.Group("/auth", utils.GetNextMiddleWare)
-	group.Post("/register", ctrl.Register)
-	group.Post("/login", ctrl.Login)
-	group.Get("/user/:id", ctrl.GetUserById)
-	group.Get("/user/email/:email", ctrl.GetUserByEmail)
-	group.Put("/user/activate/:id", ctrl.Activate)
-	group.Delete("/user/deactivate/:id", ctrl.Deactivate)
-	group.Put("/user/:id", ctrl.Update)
+	group.Post("/register", ctrl.Register)                // register new user
+	group.Post("/login", ctrl.Login)                      // login user
+	group.Get("/user/:id", ctrl.GetUserById)              // get user by id
+	group.Get("/user/email/:email", ctrl.GetUserByEmail)  // get user by email
+	group.Put("/user/activate/:id", ctrl.Activate)        // activate user
+	group.Delete("/user/deactivate/:id", ctrl.Deactivate) // deactivate user
+	group.Put("/user/:id", ctrl.Update)                   // update user
 }

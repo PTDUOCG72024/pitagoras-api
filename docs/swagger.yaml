@@ -1,0 +1,347 @@
+basePath: /
+definitions:
+  users.UserCreateRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  users.UserCreateResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  users.UserLoginResponse:
+    properties:
+      created_at:
+        default: now()
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      last_login:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      updated_at:
+        default: now()
+        type: string
+    type: object
+  users.UserRequest:
+    properties:
+      created_at:
+        default: now()
+        type: string
+      delete_at:
+        type: string
+      email:
+        type: string
+      last_login:
+        type: string
+      password:
+        type: string
+      updated_at:
+        default: now()
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  users.UserResponse:
+    properties:
+      created_at:
+        default: now()
+        type: string
+      delete_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      is_deleted:
+        type: boolean
+      last_login:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      updated_at:
+        default: now()
+        type: string
+    type: object
+  users.UserUpdateRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    type: object
+host: https://pitagoras-api-production.up.railway.app
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: Golang GoFiber swagger auto generate step by step by swaggo
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: GoFiber Pitagoras API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: login user
+      parameters:
+      - description: UserRequest
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserLoginResponse'
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "401":
+          description: Cuenta de usuario deshabilitada
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error iniciando sesión
+          schema:
+            type: string
+      summary: login user
+      tags:
+      - users
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: register new user
+      parameters:
+      - description: UserCreateRequest
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserCreateResponse'
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "409":
+          description: El usuario ya existe
+          schema:
+            type: string
+        "500":
+          description: Error creando el usuario
+          schema:
+            type: string
+      summary: register new user
+      tags:
+      - users
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get user by id
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserResponse'
+        "400":
+          description: Usuario no existe
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error obteniendo el usuario
+          schema:
+            type: string
+      summary: get user by id
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: update user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UserUpdateRequest
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Usuario actualizado correctamente
+          schema:
+            type: string
+        "400":
+          description: Usuario no existe
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error actualizando el usuario
+          schema:
+            type: string
+      summary: update user
+      tags:
+      - users
+  /users/activate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: activate user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Usuario activado correctamente
+          schema:
+            type: string
+        "400":
+          description: Usuario no existe
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error activando el usuario
+          schema:
+            type: string
+      summary: activate user
+      tags:
+      - users
+  /users/deactivate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: deactivate user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Usuario desactivado correctamente
+          schema:
+            type: string
+        "400":
+          description: Usuario no existe
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error eliminando el usuario
+          schema:
+            type: string
+      summary: deactivate user
+      tags:
+      - users
+  /users/email/{email}:
+    get:
+      consumes:
+      - application/json
+      description: get user by email
+      parameters:
+      - description: User Email
+        in: path
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserResponse'
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error obteniendo el usuario
+          schema:
+            type: string
+      summary: get user by email
+      tags:
+      - users
+swagger: "2.0"

@@ -25,8 +25,8 @@ func NewRepository(logger *zap.Logger, collection *mongo.Collection) Repository 
 }
 
 func (r *repository) CreateUser(ctx context.Context, user *User) error {
-	user.CreatedAt = primitive.NewDateTimeFromTime(time.Now())
-	user.UpdatedAt = primitive.NewDateTimeFromTime(time.Now())
+	user.CreatedAt = time.Now()
+	user.UpdatedAt = time.Now()
 
 	_, err := r.collection.InsertOne(ctx, user)
 	if err != nil {

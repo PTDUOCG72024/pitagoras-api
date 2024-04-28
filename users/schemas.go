@@ -1,6 +1,10 @@
 package users
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 // Request
 type UserCreateRequest struct {
@@ -16,12 +20,12 @@ type UserUpdateRequest struct {
 }
 
 type UserRequest struct {
-	Email     string             `bson:"email,omitempty" json:"email" validate:"required,email"`
-	Password  string             `bson:"password,omitempty" json:"password,omitempty" validate:"required"`
-	LastLogin primitive.DateTime `bson:"last_login,omitempty" json:"last_login"`
-	CreatedAt primitive.DateTime `bson:"created_at,omitempty" json:"created_at" default:"now()"`
-	UpdatedAt primitive.DateTime `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
-	DeleteAt  primitive.DateTime `bson:"delete_at,omitempty" json:"delete_at"`
+	Email     string    `bson:"email,omitempty" json:"email" validate:"required,email"`
+	Password  string    `bson:"password,omitempty" json:"password,omitempty" validate:"required"`
+	LastLogin time.Time `bson:"last_login,omitempty" json:"last_login"`
+	CreatedAt time.Time `bson:"created_at,omitempty" json:"created_at" default:"now()"`
+	UpdatedAt time.Time `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
+	DeleteAt  time.Time `bson:"delete_at,omitempty" json:"delete_at"`
 }
 
 // Response
@@ -31,10 +35,10 @@ type UserResponse struct {
 	Email     string             `bson:"email,omitempty" json:"email"`
 	Password  string             `bson:"password,omitempty" json:"password,omitempty"`
 	IsDeleted bool               `bson:"is_deleted,omitempty" json:"is_deleted"`
-	LastLogin primitive.DateTime `bson:"last_login,omitempty" json:"last_login"`
-	CreatedAt primitive.DateTime `bson:"created_at,omitempty" json:"created_at" default:"now()"`
-	UpdatedAt primitive.DateTime `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
-	DeleteAt  primitive.DateTime `bson:"delete_at,omitempty" json:"delete_at"`
+	LastLogin time.Time          `bson:"last_login,omitempty" json:"last_login"`
+	CreatedAt time.Time          `bson:"created_at,omitempty" json:"created_at" default:"now()"`
+	UpdatedAt time.Time          `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
+	DeleteAt  time.Time          `bson:"delete_at,omitempty" json:"delete_at"`
 }
 
 type UserLoginResponse struct {
@@ -42,13 +46,18 @@ type UserLoginResponse struct {
 	Name      string             `bson:"name,omitempty" json:"name"`
 	Email     string             `bson:"email,omitempty" json:"email"`
 	Password  string             `bson:"password,omitempty" json:"password,omitempty"`
-	LastLogin primitive.DateTime `bson:"last_login,omitempty" json:"last_login"`
-	CreatedAt primitive.DateTime `bson:"created_at,omitempty" json:"created_at" default:"now()"`
-	UpdatedAt primitive.DateTime `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
+	LastLogin time.Time          `bson:"last_login,omitempty" json:"last_login"`
+	CreatedAt time.Time          `bson:"created_at,omitempty" json:"created_at" default:"now()"`
+	UpdatedAt time.Time          `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
 }
 
 type UserCreateResponse struct {
 	ID    primitive.ObjectID `bson:"_id,omitempty" json:"id"`
 	Name  string             `bson:"name,omitempty" json:"name"`
 	Email string             `bson:"email,omitempty" json:"email"`
+}
+
+type ResultResponse struct {
+	Message string `json:"message"`
+	Data    any    `json:"data"`
 }

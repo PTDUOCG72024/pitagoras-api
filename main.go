@@ -11,6 +11,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/swagger"
 	"github.com/joho/godotenv"
 	"github.com/xbizzybone/pitagoras-api/projects"
 	"github.com/xbizzybone/pitagoras-api/users"
@@ -18,6 +19,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	_ "github.com/xbizzybone/pitagoras-api/docs"
 )
 
 var client *mongo.Client
@@ -57,6 +60,16 @@ func init() {
 	zapLogger.Info("MongoDB initialized")
 }
 
+// @title GoFiber Pitagoras API
+// @version 1.0
+// @description Golang GoFiber swagger auto generate step by step by swaggo
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.email fiber@swagger.io
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host https://pitagoras-api-production.up.railway.app
+// @BasePath /
 func main() {
 	defer zapLogger.Sync()
 
@@ -66,6 +79,8 @@ func main() {
 	app.Use(logger.New())
 	app.Use(recover.New())
 	app.Use(cors.New())
+
+	app.Get("/swagger/*", swagger.HandlerDefault) // default
 
 	users.ApplyRoutes(app, zapLogger, usersCollection)
 	projects.ApplyRoutes(app, zapLogger, projectsCollection)
