@@ -158,8 +158,8 @@ definitions:
 host: pitagoras-api-production.up.railway.app
 info:
   contact:
-    email: fiber@swagger.io
-    name: API Support
+    email: xbizzybone@gmail.com
+    name: xbizzybone
   description: Golang GoFiber swagger auto generate step by step by swaggo
   license:
     name: Apache 2.0

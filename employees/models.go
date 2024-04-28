@@ -1,6 +1,10 @@
 package employees
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
 
 type Employee struct {
 	ID                   primitive.ObjectID `bson:"_id,omitempty" json:"id"`
@@ -14,20 +18,39 @@ type Employee struct {
 	Supervisor           Supervisor         `bson:"supervisor,omitempty" json:"supervisor"`
 	Position             Position           `bson:"position,omitempty" json:"position"`
 	Nationality          Nationality        `bson:"nationality,omitempty" json:"nationality"`
+	IsActive             bool               `bson:"is_active,omitempty" json:"is_active"`
+	IsDeleted            bool               `bson:"is_deleted,omitempty" json:"is_deleted"`
+	CreatedAt            time.Time          `bson:"created_at,omitempty" json:"created_at" default:"now()"`
+	UpdatedAt            time.Time          `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
+	DeleteAt             time.Time          `bson:"delete_at,omitempty" json:"delete_at"`
 }
 
 type Supervisor struct {
-	ID       string `bson:"_id,omitempty" json:"id"`
-	Name     string `bson:"name,omitempty" json:"name"`
-	IsActive bool   `bson:"is_active,omitempty" json:"is_active"`
+	ID        string    `bson:"_id,omitempty" json:"id"`
+	Name      string    `bson:"name,omitempty" json:"name"`
+	IsActive  bool      `bson:"is_active,omitempty" json:"is_active"`
+	IsDeleted bool      `bson:"is_deleted,omitempty" json:"is_deleted"`
+	CreatedAt time.Time `bson:"created_at,omitempty" json:"created_at" default:"now()"`
+	UpdatedAt time.Time `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
+	DeleteAt  time.Time `bson:"delete_at,omitempty" json:"delete_at"`
 }
 
 type Position struct {
-	ID   string `bson:"_id,omitempty" json:"id"`
-	Name string `bson:"name,omitempty" json:"name"`
+	ID        string    `bson:"_id,omitempty" json:"id"`
+	Name      string    `bson:"name,omitempty" json:"name"`
+	IsActive  bool      `bson:"is_active,omitempty" json:"is_active"`
+	IsDeleted bool      `bson:"is_deleted,omitempty" json:"is_deleted"`
+	CreatedAt time.Time `bson:"created_at,omitempty" json:"created_at" default:"now()"`
+	UpdatedAt time.Time `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
+	DeleteAt  time.Time `bson:"delete_at,omitempty" json:"delete_at"`
 }
 
 type Nationality struct {
-	ID   string `bson:"_id,omitempty" json:"id"`
-	Name string `bson:"name,omitempty" json:"name"`
+	ID        string    `bson:"_id,omitempty" json:"id"`
+	Name      string    `bson:"name,omitempty" json:"name"`
+	IsActive  bool      `bson:"is_active,omitempty" json:"is_active"`
+	IsDeleted bool      `bson:"is_deleted,omitempty" json:"is_deleted"`
+	CreatedAt time.Time `bson:"created_at,omitempty" json:"created_at" default:"now()"`
+	UpdatedAt time.Time `bson:"updated_at,omitempty" json:"updated_at" default:"now()"`
+	DeleteAt  time.Time `bson:"delete_at,omitempty" json:"delete_at"`
 }
