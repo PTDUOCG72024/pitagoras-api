@@ -79,7 +79,7 @@ func init() {
 	positionsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_POSITIONS_COLLECTION_NAME"))
 	supervisorsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_SUPERVISORS_COLLECTION_NAME"))
 	accidentsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_ACCIDENTS_COLLECTION_NAME"))
-	classificationsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_CLASIIFICATIONS_COLLECTION_NAME"))
+	classificationsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_CLASSIFICATIONS_COLLECTION_NAME"))
 	gravitiesCollection = client.Database(dbName).Collection(os.Getenv("MONGO_GRAVITIES_COLLECTION_NAME"))
 	injuredPartsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_INJURIES_COLLECTION_NAME"))
 	zapLogger.Info("MongoDB initialized")

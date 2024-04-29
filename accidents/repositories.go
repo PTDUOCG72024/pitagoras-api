@@ -21,7 +21,7 @@ type repository struct {
 	proyectsCollection        *mongo.Collection
 }
 
-func NewRepository(logger *zap.Logger, accidentsCollection, classificationsCollection, gravitiesCollection, injuredPartsCollection *mongo.Collection, employeesCollection *mongo.Collection, proyectsCollection *mongo.Collection) Repository {
+func NewRepository(logger *zap.Logger, accidentsCollection, classificationsCollection, gravitiesCollection, injuredPartsCollection, employeesCollection, proyectsCollection *mongo.Collection) Repository {
 	return &repository{
 		logger:                    logger,
 		accidentsCollection:       accidentsCollection,
