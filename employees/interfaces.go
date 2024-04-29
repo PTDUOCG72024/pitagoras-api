@@ -44,7 +44,7 @@ type Cases interface {
 	CreateEmployee(ctx context.Context, employee *Employee) (*Employee, error)
 	GetEmployeeById(ctx context.Context, id string) (*Employee, error)
 	GetEmployees(ctx context.Context) ([]Employee, error)
-	UpdateEmployee(ctx context.Context, id string, employee *Employee) (*Employee, error)
+	UpdateEmployee(ctx context.Context, id string, employee *Employee) error
 	DeleteEmployee(ctx context.Context, id string) error
 	ActivateEmployee(ctx context.Context, id string) (*Employee, error)
 	DeactivateEmployee(ctx context.Context, id string) (*Employee, error)
@@ -52,7 +52,7 @@ type Cases interface {
 	CreateSupervisor(ctx context.Context, supervisor *Supervisor) (*Supervisor, error)
 	GetSupervisorById(ctx context.Context, id string) (*Supervisor, error)
 	GetSupervisors(ctx context.Context) ([]Supervisor, error)
-	UpdateSupervisor(ctx context.Context, id string, supervisor *Supervisor) (*Supervisor, error)
+	UpdateSupervisor(ctx context.Context, id string, supervisor *Supervisor) error
 	DeleteSupervisor(ctx context.Context, id string) error
 	ActivateSupervisor(ctx context.Context, id string) (*Supervisor, error)
 	DeactivateSupervisor(ctx context.Context, id string) (*Supervisor, error)
@@ -60,7 +60,7 @@ type Cases interface {
 	CreatePosition(ctx context.Context, position *Position) (*Position, error)
 	GetPositionById(ctx context.Context, id string) (*Position, error)
 	GetPositions(ctx context.Context) ([]Position, error)
-	UpdatePosition(ctx context.Context, id string, position *Position) (*Position, error)
+	UpdatePosition(ctx context.Context, id string, position *Position) error
 	DeletePosition(ctx context.Context, id string) error
 	ActivatePosition(ctx context.Context, id string) (*Position, error)
 	DeactivatePosition(ctx context.Context, id string) (*Position, error)
@@ -68,7 +68,7 @@ type Cases interface {
 	CreateNationality(ctx context.Context, nationality *Nationality) (*Nationality, error)
 	GetNationalityById(ctx context.Context, id string) (*Nationality, error)
 	GetNationalities(ctx context.Context) ([]Nationality, error)
-	UpdateNationality(ctx context.Context, id string, nationality *Nationality) (*Nationality, error)
+	UpdateNationality(ctx context.Context, id string, nationality *Nationality) error
 	DeleteNationality(ctx context.Context, id string) error
 	ActivateNationality(ctx context.Context, id string) (*Nationality, error)
 	DeactivateNationality(ctx context.Context, id string) (*Nationality, error)
@@ -76,22 +76,27 @@ type Cases interface {
 
 type Repository interface {
 	CreateEmployee(ctx context.Context, employee *Employee) (*Employee, error)
-	UpdateEmployee(ctx context.Context, employee *Employee) (*Employee, error)
+	UpdateEmployee(ctx context.Context, employee *Employee) error
 	GetEmployeeById(ctx context.Context, id string) (*Employee, error)
+	GetEmployeeByEmail(ctx context.Context, email string) (*Employee, error)
+	GetEmployeeByIdentificationNumber(ctx context.Context, identificationNumber string) (*Employee, error)
 	GetEmployees(ctx context.Context) ([]Employee, error)
 
 	CreateSupervisor(ctx context.Context, supervisor *Supervisor) (*Supervisor, error)
-	UpdateSupervisor(ctx context.Context, supervisor *Supervisor) (*Supervisor, error)
+	UpdateSupervisor(ctx context.Context, supervisor *Supervisor) error
 	GetSupervisorById(ctx context.Context, id string) (*Supervisor, error)
+	GetSupervisorByName(ctx context.Context, name string) (*Supervisor, error)
 	GetSupervisors(ctx context.Context) ([]Supervisor, error)
 
 	CreatePosition(ctx context.Context, position *Position) (*Position, error)
-	UpdatePosition(ctx context.Context, position *Position) (*Position, error)
+	UpdatePosition(ctx context.Context, position *Position) error
 	GetPositionById(ctx context.Context, id string) (*Position, error)
+	GetPositionByName(ctx context.Context, name string) (*Position, error)
 	GetPositions(ctx context.Context) ([]Position, error)
 
 	CreateNationality(ctx context.Context, nationality *Nationality) (*Nationality, error)
-	UpdateNationality(ctx context.Context, nationality *Nationality) (*Nationality, error)
+	UpdateNationality(ctx context.Context, nationality *Nationality) error
 	GetNationalityById(ctx context.Context, id string) (*Nationality, error)
+	GetNationalityByName(ctx context.Context, name string) (*Nationality, error)
 	GetNationalities(ctx context.Context) ([]Nationality, error)
 }

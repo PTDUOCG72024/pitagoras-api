@@ -4,7 +4,6 @@ import (
 	"context"
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
 )
 
@@ -71,16 +70,20 @@ func (c *cases) GetProjects(ctx context.Context) ([]Project, error) {
 }
 
 func (c *cases) UpdateProject(ctx context.Context, id string, project *Project) error {
-	_, err := c.repository.GetProjectById(ctx, id)
+	result, err := c.repository.GetProjectById(ctx, id)
 
 	if err != nil {
 		return err
 	}
 
-	project.ID, _ = primitive.ObjectIDFromHex(id)
-	project.UpdatedAt = time.Now()
+	result.Name = project.Name
+	result.Description = project.Description
+	result.IsActive = project.IsActive
+	result.StartDate = project.StartDate
+	result.EndDate = project.EndDate
+	result.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateProject(ctx, project); err != nil {
+	if err := c.repository.UpdateProject(ctx, &result); err != nil {
 		return err
 	}
 

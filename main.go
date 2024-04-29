@@ -13,6 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
 	"github.com/joho/godotenv"
+	"github.com/xbizzybone/pitagoras-api/employees"
 	"github.com/xbizzybone/pitagoras-api/projects"
 	"github.com/xbizzybone/pitagoras-api/users"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -26,6 +27,7 @@ import (
 var client *mongo.Client
 var usersCollection *mongo.Collection
 var projectsCollection *mongo.Collection
+var employeesCollection *mongo.Collection
 
 var zapLogger *zap.Logger
 
@@ -57,6 +59,7 @@ func init() {
 	dbName := os.Getenv("MONGO_DB_NAME")
 	usersCollection = client.Database(dbName).Collection(os.Getenv("MONGO_USERS_COLLECTION_NAME"))
 	projectsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_PROJECTS_COLLECTION_NAME"))
+	employeesCollection = client.Database(dbName).Collection(os.Getenv("MONGO_EMPLOYEES_COLLECTION_NAME"))
 	zapLogger.Info("MongoDB initialized")
 }
 
@@ -84,6 +87,7 @@ func main() {
 
 	users.ApplyRoutes(app, zapLogger, usersCollection)
 	projects.ApplyRoutes(app, zapLogger, projectsCollection)
+	employees.ApplyRoutes(app, zapLogger, employeesCollection)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }

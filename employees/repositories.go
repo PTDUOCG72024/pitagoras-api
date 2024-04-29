@@ -23,44 +23,52 @@ func NewRepository(logger *zap.Logger, collection *mongo.Collection) Repository 
 
 // CreateEmployee implements Repository.
 func (r *repository) CreateEmployee(ctx context.Context, employee *Employee) (*Employee, error) {
-	_, err := r.collection.InsertOne(ctx, employee)
+	result, err := r.collection.InsertOne(ctx, employee)
 	if err != nil {
 		r.logger.Sugar().Errorw(err.Error(), "func", "CreateEmployee", "request_id", ctx.Value("request_id"))
 		return nil, err
 	}
+
+	employee.ID = result.InsertedID.(primitive.ObjectID)
 
 	return employee, nil
 }
 
 // CreateNationality implements Repository.
 func (r *repository) CreateNationality(ctx context.Context, nationality *Nationality) (*Nationality, error) {
-	_, err := r.collection.InsertOne(ctx, nationality)
+	result, err := r.collection.InsertOne(ctx, nationality)
 	if err != nil {
 		r.logger.Sugar().Errorw(err.Error(), "func", "CreateNationality", "request_id", ctx.Value("request_id"))
 		return nil, err
 	}
+
+	nationality.ID = result.InsertedID.(primitive.ObjectID)
 
 	return nationality, nil
 }
 
 // CreatePosition implements Repository.
 func (r *repository) CreatePosition(ctx context.Context, position *Position) (*Position, error) {
-	_, err := r.collection.InsertOne(ctx, position)
+	result, err := r.collection.InsertOne(ctx, position)
 	if err != nil {
 		r.logger.Sugar().Errorw(err.Error(), "func", "CreatePosition", "request_id", ctx.Value("request_id"))
 		return nil, err
 	}
+
+	position.ID = result.InsertedID.(primitive.ObjectID)
 
 	return position, nil
 }
 
 // CreateSupervisor implements Repository.
 func (r *repository) CreateSupervisor(ctx context.Context, supervisor *Supervisor) (*Supervisor, error) {
-	_, err := r.collection.InsertOne(ctx, supervisor)
+	result, err := r.collection.InsertOne(ctx, supervisor)
 	if err != nil {
 		r.logger.Sugar().Errorw(err.Error(), "func", "CreateSupervisor", "request_id", ctx.Value("request_id"))
 		return nil, err
 	}
+
+	supervisor.ID = result.InsertedID.(primitive.ObjectID)
 
 	return supervisor, nil
 }
@@ -222,45 +230,125 @@ func (r *repository) GetSupervisors(ctx context.Context) ([]Supervisor, error) {
 }
 
 // UpdateEmployee implements Repository.
-func (r *repository) UpdateEmployee(ctx context.Context, employee *Employee) (*Employee, error) {
+func (r *repository) UpdateEmployee(ctx context.Context, employee *Employee) error {
 	_, err := r.collection.ReplaceOne(ctx, bson.M{"_id": employee.ID}, employee)
 	if err != nil {
 		r.logger.Sugar().Errorw(err.Error(), "func", "UpdateEmployee", "request_id", ctx.Value("request_id"))
+		return err
+	}
+
+	return nil
+}
+
+// UpdateNationality implements Repository.
+func (r *repository) UpdateNationality(ctx context.Context, nationality *Nationality) error {
+	_, err := r.collection.ReplaceOne(ctx, bson.M{"_id": nationality.ID}, nationality)
+	if err != nil {
+		r.logger.Sugar().Errorw(err.Error(), "func", "UpdateNationality", "request_id", ctx.Value("request_id"))
+		return err
+	}
+
+	return nil
+}
+
+// UpdatePosition implements Repository.
+func (r *repository) UpdatePosition(ctx context.Context, position *Position) error {
+	_, err := r.collection.ReplaceOne(ctx, bson.M{"_id": position.ID}, position)
+	if err != nil {
+		r.logger.Sugar().Errorw(err.Error(), "func", "UpdatePosition", "request_id", ctx.Value("request_id"))
+		return err
+	}
+
+	return nil
+}
+
+// UpdateSupervisor implements Repository.
+func (r *repository) UpdateSupervisor(ctx context.Context, supervisor *Supervisor) error {
+	_, err := r.collection.ReplaceOne(ctx, bson.M{"_id": supervisor.ID}, supervisor)
+	if err != nil {
+		r.logger.Sugar().Errorw(err.Error(), "func", "UpdateSupervisor", "request_id", ctx.Value("request_id"))
+		return err
+	}
+
+	return nil
+}
+
+// GetEmployeeByEmail implements Repository.
+func (r *repository) GetEmployeeByEmail(ctx context.Context, email string) (*Employee, error) {
+	employee := new(Employee)
+	err := r.collection.FindOne(ctx, bson.M{"email": email}).Decode(employee)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, err
+		}
+
+		r.logger.Sugar().Errorw(err.Error(), "func", "GetEmployeeByEmail")
 		return nil, err
 	}
 
 	return employee, nil
 }
 
-// UpdateNationality implements Repository.
-func (r *repository) UpdateNationality(ctx context.Context, nationality *Nationality) (*Nationality, error) {
-	_, err := r.collection.ReplaceOne(ctx, bson.M{"_id": nationality.ID}, nationality)
+// GetNationalityByName implements Repository.
+func (r *repository) GetNationalityByName(ctx context.Context, name string) (*Nationality, error) {
+	nationality := new(Nationality)
+	err := r.collection.FindOne(ctx, bson.M{"name": name}).Decode(nationality)
 	if err != nil {
-		r.logger.Sugar().Errorw(err.Error(), "func", "UpdateNationality", "request_id", ctx.Value("request_id"))
+		if err == mongo.ErrNoDocuments {
+			return nil, err
+		}
+
+		r.logger.Sugar().Errorw(err.Error(), "func", "GetNationalityByName")
 		return nil, err
 	}
 
 	return nationality, nil
 }
 
-// UpdatePosition implements Repository.
-func (r *repository) UpdatePosition(ctx context.Context, position *Position) (*Position, error) {
-	_, err := r.collection.ReplaceOne(ctx, bson.M{"_id": position.ID}, position)
+// GetPositionByName implements Repository.
+func (r *repository) GetPositionByName(ctx context.Context, name string) (*Position, error) {
+	position := new(Position)
+	err := r.collection.FindOne(ctx, bson.M{"name": name}).Decode(position)
 	if err != nil {
-		r.logger.Sugar().Errorw(err.Error(), "func", "UpdatePosition", "request_id", ctx.Value("request_id"))
+		if err == mongo.ErrNoDocuments {
+			return nil, err
+		}
+
+		r.logger.Sugar().Errorw(err.Error(), "func", "GetPositionByName")
 		return nil, err
 	}
 
 	return position, nil
 }
 
-// UpdateSupervisor implements Repository.
-func (r *repository) UpdateSupervisor(ctx context.Context, supervisor *Supervisor) (*Supervisor, error) {
-	_, err := r.collection.ReplaceOne(ctx, bson.M{"_id": supervisor.ID}, supervisor)
+// GetSupervisorByName implements Repository.
+func (r *repository) GetSupervisorByName(ctx context.Context, name string) (*Supervisor, error) {
+	supervisor := new(Supervisor)
+	err := r.collection.FindOne(ctx, bson.M{"name": name}).Decode(supervisor)
 	if err != nil {
-		r.logger.Sugar().Errorw(err.Error(), "func", "UpdateSupervisor", "request_id", ctx.Value("request_id"))
+		if err == mongo.ErrNoDocuments {
+			return nil, err
+		}
+
+		r.logger.Sugar().Errorw(err.Error(), "func", "GetSupervisorByName")
 		return nil, err
 	}
 
 	return supervisor, nil
+}
+
+// GetEmployeeByIdentificationNumber implements Repository.
+func (r *repository) GetEmployeeByIdentificationNumber(ctx context.Context, identificationNumber string) (*Employee, error) {
+	employee := new(Employee)
+	err := r.collection.FindOne(ctx, bson.M{"identification_number": identificationNumber}).Decode(employee)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, err
+		}
+
+		r.logger.Sugar().Errorw(err.Error(), "func", "GetEmployeeByIdentificationNumber")
+		return nil, err
+	}
+
+	return employee, nil
 }
