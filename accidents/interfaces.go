@@ -4,6 +4,8 @@ import (
 	"context"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/xbizzybone/pitagoras-api/employees"
+	"github.com/xbizzybone/pitagoras-api/projects"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -79,16 +81,22 @@ type Repository interface {
 
 	CreateClassification(ctx context.Context, classification *Classification) (*Classification, error)
 	GetClassificationById(ctx context.Context, id primitive.ObjectID) (*Classification, error)
+	GetClassificationByName(ctx context.Context, name string) (*Classification, error)
 	GetClassifications(ctx context.Context) ([]Classification, error)
 	UpdateClassification(ctx context.Context, classification *Classification) error
 
 	CreateGravity(ctx context.Context, gravity *Gravity) (*Gravity, error)
 	GetGravityById(ctx context.Context, id primitive.ObjectID) (*Gravity, error)
+	GetGravityByName(ctx context.Context, name string) (*Gravity, error)
 	GetGravities(ctx context.Context) ([]Gravity, error)
 	UpdateGravity(ctx context.Context, gravity *Gravity) error
 
 	CreateInjuredPart(ctx context.Context, injuredPart *InjuredPart) (*InjuredPart, error)
 	GetInjuredPartById(ctx context.Context, id primitive.ObjectID) (*InjuredPart, error)
+	GetInjuredPartByName(ctx context.Context, name string) (*InjuredPart, error)
 	GetInjuredParts(ctx context.Context) ([]InjuredPart, error)
 	UpdateInjuredPart(ctx context.Context, injuredPart *InjuredPart) error
+
+	GetEmployeeById(ctx context.Context, id primitive.ObjectID) (*employees.Employee, error)
+	GetProjectById(ctx context.Context, id primitive.ObjectID) (*projects.Project, error)
 }

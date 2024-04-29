@@ -13,6 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
 	"github.com/joho/godotenv"
+	"github.com/xbizzybone/pitagoras-api/accidents"
 	"github.com/xbizzybone/pitagoras-api/employees"
 	"github.com/xbizzybone/pitagoras-api/projects"
 	"github.com/xbizzybone/pitagoras-api/users"
@@ -24,6 +25,13 @@ import (
 	_ "github.com/xbizzybone/pitagoras-api/docs"
 )
 
+/*
+MONGO_ACCIDENTS_COLLECTION_NAME=accidents
+MONGO_CLASIIFICATIONS_COLLECTION_NAME=classifications
+MONGO_GRAVITIES_COLLECTION_NAME=gravities
+MONGO_INJURIES_COLLECTION_NAME=injuries
+*/
+
 var client *mongo.Client
 var usersCollection *mongo.Collection
 var projectsCollection *mongo.Collection
@@ -31,6 +39,10 @@ var employeesCollection *mongo.Collection
 var nationalitiesCollection *mongo.Collection
 var positionsCollection *mongo.Collection
 var supervisorsCollection *mongo.Collection
+var accidentsCollection *mongo.Collection
+var classificationsCollection *mongo.Collection
+var gravitiesCollection *mongo.Collection
+var injuredPartsCollection *mongo.Collection
 
 var zapLogger *zap.Logger
 
@@ -66,6 +78,10 @@ func init() {
 	nationalitiesCollection = client.Database(dbName).Collection(os.Getenv("MONGO_NATIONALITIES_COLLECTION_NAME"))
 	positionsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_POSITIONS_COLLECTION_NAME"))
 	supervisorsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_SUPERVISORS_COLLECTION_NAME"))
+	accidentsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_ACCIDENTS_COLLECTION_NAME"))
+	classificationsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_CLASIIFICATIONS_COLLECTION_NAME"))
+	gravitiesCollection = client.Database(dbName).Collection(os.Getenv("MONGO_GRAVITIES_COLLECTION_NAME"))
+	injuredPartsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_INJURIES_COLLECTION_NAME"))
 	zapLogger.Info("MongoDB initialized")
 }
 
@@ -94,6 +110,7 @@ func main() {
 	users.ApplyRoutes(app, zapLogger, usersCollection)
 	projects.ApplyRoutes(app, zapLogger, projectsCollection)
 	employees.ApplyRoutes(app, zapLogger, employeesCollection, nationalitiesCollection, positionsCollection, supervisorsCollection)
+	accidents.ApplyRoutes(app, zapLogger, accidentsCollection, classificationsCollection, gravitiesCollection, injuredPartsCollection, projectsCollection, employeesCollection)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
