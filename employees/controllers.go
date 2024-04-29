@@ -40,13 +40,13 @@ func (c *controller) ActivateEmployee(ctx *fiber.Ctx) error {
 // ActivateNationality godoc
 // @Summary Activate a new nationality
 // @Description Activate a new nationality
-// @Tags employees
+// @Tags nationalities
 // @Accept json
 // @Produce json
 // @Param id path string true "Nationality ID"
 // @Success 200 {string} string "Nacionalidad activada correctamente"
 // @Failure 500 {string} string "Error activando la nacionalidad"
-// @Router /employees/nationalities/activate/{id} [put]
+// @Router /nationalities/activate/{id} [put]
 func (c *controller) ActivateNationality(ctx *fiber.Ctx) error {
 	nationalityID := ctx.Params("id")
 
@@ -64,13 +64,13 @@ func (c *controller) ActivateNationality(ctx *fiber.Ctx) error {
 // ActivatePosition godoc
 // @Summary Activate a new position
 // @Description Activate a new position
-// @Tags employees
+// @Tags positions
 // @Accept json
 // @Produce json
 // @Param id path string true "Position ID"
 // @Success 200 {string} string "Cargo activado correctamente"
 // @Failure 500 {string} string "Error activando el cargo"
-// @Router /employees/positions/activate/{id} [put]
+// @Router /positions/activate/{id} [put]
 func (c *controller) ActivatePosition(ctx *fiber.Ctx) error {
 	positionID := ctx.Params("id")
 
@@ -88,13 +88,13 @@ func (c *controller) ActivatePosition(ctx *fiber.Ctx) error {
 // ActivateSupervisor godoc
 // @Summary Activate a new supervisor
 // @Description Activate a new supervisor
-// @Tags employees
+// @Tags supervisors
 // @Accept json
 // @Produce json
 // @Param id path string true "Supervisor ID"
 // @Success 200 {string} string "Supervisor activado correctamente"
 // @Failure 500 {string} string "Error activando el supervisor"
-// @Router /employees/supervisors/activate/{id} [put]
+// @Router /supervisors/activate/{id} [put]
 func (c *controller) ActivateSupervisor(ctx *fiber.Ctx) error {
 	supervisorID := ctx.Params("id")
 
@@ -175,14 +175,14 @@ func (c *controller) CreateEmployee(ctx *fiber.Ctx) error {
 // CreateNationality godoc
 // @Summary Create a new nationality
 // @Description Create a new nationality
-// @Tags employees
+// @Tags nationalities
 // @Accept json
 // @Produce json
 // @Param nationality body CreateNationalityRequest true "Nationality object that needs to be created"
 // @Success 200 {object} CreateNationalityResponse
 // @Failure 400 {string} string "Error validando el cuerpo de la petición"
 // @Failure 500 {string} string "Error creando la nacionalidad"
-// @Router /employees/nationalities [post]
+// @Router /nationalities [post]
 func (c *controller) CreateNationality(ctx *fiber.Ctx) error {
 	requestBody := new(CreateNationalityRequest)
 
@@ -221,14 +221,14 @@ func (c *controller) CreateNationality(ctx *fiber.Ctx) error {
 // CreatePosition godoc
 // @Summary Create a new position
 // @Description Create a new position
-// @Tags employees
+// @Tags positions
 // @Accept json
 // @Produce json
 // @Param position body CreatePositionRequest true "Position object that needs to be created"
 // @Success 200 {object} CreatePositionResponse
 // @Failure 400 {string} string "Error validando el cuerpo de la petición"
 // @Failure 500 {string} string "Error creando el cargo"
-// @Router /employees/positions [post]
+// @Router /positions [post]
 func (c *controller) CreatePosition(ctx *fiber.Ctx) error {
 	requestBody := new(CreatePositionRequest)
 
@@ -267,14 +267,14 @@ func (c *controller) CreatePosition(ctx *fiber.Ctx) error {
 // CreateSupervisor godoc
 // @Summary Create a new supervisor
 // @Description Create a new supervisor
-// @Tags employees
+// @Tags supervisors
 // @Accept json
 // @Produce json
 // @Param supervisor body CreateSupervisorRequest true "Supervisor object that needs to be created"
 // @Success 200 {object} CreateSupervisorResponse
 // @Failure 400 {string} string "Error validando el cuerpo de la petición"
 // @Failure 500 {string} string "Error creando el supervisor"
-// @Router /employees/supervisors [post]
+// @Router /supervisors [post]
 func (c *controller) CreateSupervisor(ctx *fiber.Ctx) error {
 	requestBody := new(CreateSupervisorRequest)
 
@@ -337,13 +337,13 @@ func (c *controller) DeactivateEmployee(ctx *fiber.Ctx) error {
 // DeactivateNationality godoc
 // @Summary Deactivate a nationality
 // @Description Deactivate a nationality
-// @Tags employees
+// @Tags nationalities
 // @Accept json
 // @Produce json
 // @Param id path string true "Nationality ID"
 // @Success 200 {string} string "Nacionalidad desactivada correctamente"
 // @Failure 500 {string} string "Error desactivando la nacionalidad"
-// @Router /employees/nationalities/deactivate/{id} [put]
+// @Router /nationalities/deactivate/{id} [put]
 func (c *controller) DeactivateNationality(ctx *fiber.Ctx) error {
 	nationalityID := ctx.Params("id")
 
@@ -361,13 +361,13 @@ func (c *controller) DeactivateNationality(ctx *fiber.Ctx) error {
 // DeactivatePosition godoc
 // @Summary Deactivate a position
 // @Description Deactivate a position
-// @Tags employees
+// @Tags positions
 // @Accept json
 // @Produce json
 // @Param id path string true "Position ID"
 // @Success 200 {string} string "Cargo desactivado correctamente"
 // @Failure 500 {string} string "Error desactivando el cargo"
-// @Router /employees/positions/deactivate/{id} [put]
+// @Router /positions/deactivate/{id} [put]
 func (c *controller) DeactivatePosition(ctx *fiber.Ctx) error {
 	positionID := ctx.Params("id")
 
@@ -385,13 +385,13 @@ func (c *controller) DeactivatePosition(ctx *fiber.Ctx) error {
 // DeactivateSupervisor godoc
 // @Summary Deactivate a supervisor
 // @Description Deactivate a supervisor
-// @Tags employees
+// @Tags supervisors
 // @Accept json
 // @Produce json
 // @Param id path string true "Supervisor ID"
 // @Success 200 {string} string "Supervisor desactivado correctamente"
 // @Failure 500 {string} string "Error desactivando el supervisor"
-// @Router /employees/supervisors/deactivate/{id} [put]
+// @Router /supervisors/deactivate/{id} [put]
 func (c *controller) DeactivateSupervisor(ctx *fiber.Ctx) error {
 	supervisorID := ctx.Params("id")
 
@@ -433,13 +433,13 @@ func (c *controller) DeleteEmployee(ctx *fiber.Ctx) error {
 // DeleteNationality godoc
 // @Summary Delete a nationality
 // @Description Delete a nationality
-// @Tags employees
+// @Tags nationalities
 // @Accept json
 // @Produce json
 // @Param id path string true "Nationality ID"
 // @Success 200 {string} string "Nacionalidad eliminada correctamente"
 // @Failure 500 {string} string "Error eliminando la nacionalidad"
-// @Router /employees/nationalities/{id} [delete]
+// @Router /nationalities/{id} [delete]
 func (c *controller) DeleteNationality(ctx *fiber.Ctx) error {
 	nationalityID := ctx.Params("id")
 
@@ -457,13 +457,13 @@ func (c *controller) DeleteNationality(ctx *fiber.Ctx) error {
 // DeletePosition godoc
 // @Summary Delete a position
 // @Description Delete a position
-// @Tags employees
+// @Tags positions
 // @Accept json
 // @Produce json
 // @Param id path string true "Position ID"
 // @Success 200 {string} string "Cargo eliminado correctamente"
 // @Failure 500 {string} string "Error eliminando el cargo"
-// @Router /employees/positions/{id} [delete]
+// @Router /positions/{id} [delete]
 func (c *controller) DeletePosition(ctx *fiber.Ctx) error {
 	positionID := ctx.Params("id")
 
@@ -481,13 +481,13 @@ func (c *controller) DeletePosition(ctx *fiber.Ctx) error {
 // DeleteSupervisor godoc
 // @Summary Delete a supervisor
 // @Description Delete a supervisor
-// @Tags employees
+// @Tags supervisors
 // @Accept json
 // @Produce json
 // @Param id path string true "Supervisor ID"
 // @Success 200 {string} string "Supervisor eliminado correctamente"
 // @Failure 500 {string} string "Error eliminando el supervisor"
-// @Router /employees/supervisors/{id} [delete]
+// @Router /supervisors/{id} [delete]
 func (c *controller) DeleteSupervisor(ctx *fiber.Ctx) error {
 	supervisorID := ctx.Params("id")
 
@@ -593,12 +593,12 @@ func (c *controller) GetEmployees(ctx *fiber.Ctx) error {
 // GetNationalities godoc
 // @Summary Get all nationalities
 // @Description Get all nationalities
-// @Tags employees
+// @Tags nationalities
 // @Accept json
 // @Produce json
 // @Success 200 {object} []GetNationalityResponse
 // @Failure 500 {string} string "Error obteniendo las nacionalidades"
-// @Router /employees/nationalities [get]
+// @Router /nationalities [get]
 func (c *controller) GetNationalities(ctx *fiber.Ctx) error {
 	nationalities, err := c.cases.GetNationalities(ctx.UserContext())
 
@@ -631,13 +631,13 @@ func (c *controller) GetNationalities(ctx *fiber.Ctx) error {
 // GetNationalityById godoc
 // @Summary Get nationality by id
 // @Description Get nationality by id
-// @Tags employees
+// @Tags nationalities
 // @Accept json
 // @Produce json
 // @Param id path string true "Nationality ID"
 // @Success 200 {object} GetNationalityResponse
 // @Failure 500 {string} string "Error obteniendo la nacionalidad"
-// @Router /employees/nationalities/{id} [get]
+// @Router /nationalities/{id} [get]
 func (c *controller) GetNationalityById(ctx *fiber.Ctx) error {
 	nationalityID := ctx.Params("id")
 
@@ -667,13 +667,13 @@ func (c *controller) GetNationalityById(ctx *fiber.Ctx) error {
 // GetPositionById godoc
 // @Summary Get position by id
 // @Description Get position by id
-// @Tags employees
+// @Tags positions
 // @Accept json
 // @Produce json
 // @Param id path string true "Position ID"
 // @Success 200 {object} GetPositionResponse
 // @Failure 500 {string} string "Error obteniendo el cargo"
-// @Router /employees/positions/{id} [get]
+// @Router /positions/{id} [get]
 func (c *controller) GetPositionById(ctx *fiber.Ctx) error {
 	positionID := ctx.Params("id")
 
@@ -703,12 +703,12 @@ func (c *controller) GetPositionById(ctx *fiber.Ctx) error {
 // GetPositions godoc
 // @Summary Get all positions
 // @Description Get all positions
-// @Tags employees
+// @Tags positions
 // @Accept json
 // @Produce json
 // @Success 200 {object} []GetPositionResponse
 // @Failure 500 {string} string "Error obteniendo los cargos"
-// @Router /employees/positions [get]
+// @Router /positions [get]
 func (c *controller) GetPositions(ctx *fiber.Ctx) error {
 	positions, err := c.cases.GetPositions(ctx.UserContext())
 
@@ -741,13 +741,13 @@ func (c *controller) GetPositions(ctx *fiber.Ctx) error {
 // GetSupervisorById godoc
 // @Summary Get supervisor by id
 // @Description Get supervisor by id
-// @Tags employees
+// @Tags supervisors
 // @Accept json
 // @Produce json
 // @Param id path string true "Supervisor ID"
 // @Success 200 {object} GetSupervisorResponse
 // @Failure 500 {string} string "Error obteniendo el supervisor"
-// @Router /employees/supervisors/{id} [get]
+// @Router /supervisors/{id} [get]
 func (c *controller) GetSupervisorById(ctx *fiber.Ctx) error {
 	supervisorID := ctx.Params("id")
 
@@ -777,12 +777,12 @@ func (c *controller) GetSupervisorById(ctx *fiber.Ctx) error {
 // GetSupervisors godoc
 // @Summary Get all supervisors
 // @Description Get all supervisors
-// @Tags employees
+// @Tags supervisors
 // @Accept json
 // @Produce json
 // @Success 200 {object} []GetSupervisorResponse
 // @Failure 500 {string} string "Error obteniendo los supervisores"
-// @Router /employees/supervisors [get]
+// @Router /supervisors [get]
 func (c *controller) GetSupervisors(ctx *fiber.Ctx) error {
 	supervisors, err := c.cases.GetSupervisors(ctx.UserContext())
 
@@ -862,7 +862,7 @@ func (c *controller) UpdateEmployee(ctx *fiber.Ctx) error {
 // UpdateNationality godoc
 // @Summary Update a nationality
 // @Description Update a nationality
-// @Tags employees
+// @Tags nationalities
 // @Accept json
 // @Produce json
 // @Param id path string true "Nationality ID"
@@ -870,7 +870,7 @@ func (c *controller) UpdateEmployee(ctx *fiber.Ctx) error {
 // @Success 200 {string} string "Nacionalidad actualizada correctamente"
 // @Failure 400 {string} string "Error validando el cuerpo de la petición"
 // @Failure 500 {string} string "Error actualizando la nacionalidad"
-// @Router /employees/nationalities/{id} [put]
+// @Router /nationalities/{id} [put]
 func (c *controller) UpdateNationality(ctx *fiber.Ctx) error {
 	nationalityID := ctx.Params("id")
 
@@ -900,7 +900,7 @@ func (c *controller) UpdateNationality(ctx *fiber.Ctx) error {
 // UpdatePosition godoc
 // @Summary Update a position
 // @Description Update a position
-// @Tags employees
+// @Tags positions
 // @Accept json
 // @Produce json
 // @Param id path string true "Position ID"
@@ -908,7 +908,7 @@ func (c *controller) UpdateNationality(ctx *fiber.Ctx) error {
 // @Success 200 {string} string "Cargo actualizado correctamente"
 // @Failure 400 {string} string "Error validando el cuerpo de la petición"
 // @Failure 500 {string} string "Error actualizando el cargo"
-// @Router /employees/positions/{id} [put]
+// @Router /positions/{id} [put]
 func (c *controller) UpdatePosition(ctx *fiber.Ctx) error {
 	positionID := ctx.Params("id")
 
@@ -938,7 +938,7 @@ func (c *controller) UpdatePosition(ctx *fiber.Ctx) error {
 // UpdateSupervisor godoc
 // @Summary Update a supervisor
 // @Description Update a supervisor
-// @Tags employees
+// @Tags supervisors
 // @Accept json
 // @Produce json
 // @Param id path string true "Supervisor ID"
@@ -946,7 +946,7 @@ func (c *controller) UpdatePosition(ctx *fiber.Ctx) error {
 // @Success 200 {string} string "Supervisor actualizado correctamente"
 // @Failure 400 {string} string "Error validando el cuerpo de la petición"
 // @Failure 500 {string} string "Error actualizando el supervisor"
-// @Router /employees/supervisors/{id} [put]
+// @Router /supervisors/{id} [put]
 func (c *controller) UpdateSupervisor(ctx *fiber.Ctx) error {
 	supervisorID := ctx.Params("id")
 

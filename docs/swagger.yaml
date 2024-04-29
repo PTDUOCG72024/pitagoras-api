@@ -720,7 +720,7 @@ paths:
       summary: Deactivate a employee
       tags:
       - employees
-  /employees/nationalities:
+  /nationalities:
     get:
       consumes:
       - application/json
@@ -740,7 +740,7 @@ paths:
             type: string
       summary: Get all nationalities
       tags:
-      - employees
+      - nationalities
     post:
       consumes:
       - application/json
@@ -769,8 +769,8 @@ paths:
             type: string
       summary: Create a new nationality
       tags:
-      - employees
-  /employees/nationalities/{id}:
+      - nationalities
+  /nationalities/{id}:
     delete:
       consumes:
       - application/json
@@ -794,7 +794,7 @@ paths:
             type: string
       summary: Delete a nationality
       tags:
-      - employees
+      - nationalities
     get:
       consumes:
       - application/json
@@ -818,7 +818,7 @@ paths:
             type: string
       summary: Get nationality by id
       tags:
-      - employees
+      - nationalities
     put:
       consumes:
       - application/json
@@ -852,8 +852,8 @@ paths:
             type: string
       summary: Update a nationality
       tags:
-      - employees
-  /employees/nationalities/activate/{id}:
+      - nationalities
+  /nationalities/activate/{id}:
     put:
       consumes:
       - application/json
@@ -877,8 +877,8 @@ paths:
             type: string
       summary: Activate a new nationality
       tags:
-      - employees
-  /employees/nationalities/deactivate/{id}:
+      - nationalities
+  /nationalities/deactivate/{id}:
     put:
       consumes:
       - application/json
@@ -902,8 +902,8 @@ paths:
             type: string
       summary: Deactivate a nationality
       tags:
-      - employees
-  /employees/positions:
+      - nationalities
+  /positions:
     get:
       consumes:
       - application/json
@@ -923,7 +923,7 @@ paths:
             type: string
       summary: Get all positions
       tags:
-      - employees
+      - positions
     post:
       consumes:
       - application/json
@@ -952,8 +952,8 @@ paths:
             type: string
       summary: Create a new position
       tags:
-      - employees
-  /employees/positions/{id}:
+      - positions
+  /positions/{id}:
     delete:
       consumes:
       - application/json
@@ -977,7 +977,7 @@ paths:
             type: string
       summary: Delete a position
       tags:
-      - employees
+      - positions
     get:
       consumes:
       - application/json
@@ -1001,7 +1001,7 @@ paths:
             type: string
       summary: Get position by id
       tags:
-      - employees
+      - positions
     put:
       consumes:
       - application/json
@@ -1035,8 +1035,8 @@ paths:
             type: string
       summary: Update a position
       tags:
-      - employees
-  /employees/positions/activate/{id}:
+      - positions
+  /positions/activate/{id}:
     put:
       consumes:
       - application/json
@@ -1060,8 +1060,8 @@ paths:
             type: string
       summary: Activate a new position
       tags:
-      - employees
-  /employees/positions/deactivate/{id}:
+      - positions
+  /positions/deactivate/{id}:
     put:
       consumes:
       - application/json
@@ -1085,190 +1085,7 @@ paths:
             type: string
       summary: Deactivate a position
       tags:
-      - employees
-  /employees/supervisors:
-    get:
-      consumes:
-      - application/json
-      description: Get all supervisors
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/employees.GetSupervisorResponse'
-            type: array
-        "500":
-          description: Error obteniendo los supervisores
-          schema:
-            type: string
-      summary: Get all supervisors
-      tags:
-      - employees
-    post:
-      consumes:
-      - application/json
-      description: Create a new supervisor
-      parameters:
-      - description: Supervisor object that needs to be created
-        in: body
-        name: supervisor
-        required: true
-        schema:
-          $ref: '#/definitions/employees.CreateSupervisorRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/employees.CreateSupervisorResponse'
-        "400":
-          description: Error validando el cuerpo de la petición
-          schema:
-            type: string
-        "500":
-          description: Error creando el supervisor
-          schema:
-            type: string
-      summary: Create a new supervisor
-      tags:
-      - employees
-  /employees/supervisors/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: Delete a supervisor
-      parameters:
-      - description: Supervisor ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Supervisor eliminado correctamente
-          schema:
-            type: string
-        "500":
-          description: Error eliminando el supervisor
-          schema:
-            type: string
-      summary: Delete a supervisor
-      tags:
-      - employees
-    get:
-      consumes:
-      - application/json
-      description: Get supervisor by id
-      parameters:
-      - description: Supervisor ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/employees.GetSupervisorResponse'
-        "500":
-          description: Error obteniendo el supervisor
-          schema:
-            type: string
-      summary: Get supervisor by id
-      tags:
-      - employees
-    put:
-      consumes:
-      - application/json
-      description: Update a supervisor
-      parameters:
-      - description: Supervisor ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Supervisor object that needs to be updated
-        in: body
-        name: supervisor
-        required: true
-        schema:
-          $ref: '#/definitions/employees.UpdateSupervisorRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Supervisor actualizado correctamente
-          schema:
-            type: string
-        "400":
-          description: Error validando el cuerpo de la petición
-          schema:
-            type: string
-        "500":
-          description: Error actualizando el supervisor
-          schema:
-            type: string
-      summary: Update a supervisor
-      tags:
-      - employees
-  /employees/supervisors/activate/{id}:
-    put:
-      consumes:
-      - application/json
-      description: Activate a new supervisor
-      parameters:
-      - description: Supervisor ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Supervisor activado correctamente
-          schema:
-            type: string
-        "500":
-          description: Error activando el supervisor
-          schema:
-            type: string
-      summary: Activate a new supervisor
-      tags:
-      - employees
-  /employees/supervisors/deactivate/{id}:
-    put:
-      consumes:
-      - application/json
-      description: Deactivate a supervisor
-      parameters:
-      - description: Supervisor ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Supervisor desactivado correctamente
-          schema:
-            type: string
-        "500":
-          description: Error desactivando el supervisor
-          schema:
-            type: string
-      summary: Deactivate a supervisor
-      tags:
-      - employees
+      - positions
   /projects:
     get:
       consumes:
@@ -1452,6 +1269,189 @@ paths:
       summary: Deactivate a project
       tags:
       - projects
+  /supervisors:
+    get:
+      consumes:
+      - application/json
+      description: Get all supervisors
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/employees.GetSupervisorResponse'
+            type: array
+        "500":
+          description: Error obteniendo los supervisores
+          schema:
+            type: string
+      summary: Get all supervisors
+      tags:
+      - supervisors
+    post:
+      consumes:
+      - application/json
+      description: Create a new supervisor
+      parameters:
+      - description: Supervisor object that needs to be created
+        in: body
+        name: supervisor
+        required: true
+        schema:
+          $ref: '#/definitions/employees.CreateSupervisorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/employees.CreateSupervisorResponse'
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error creando el supervisor
+          schema:
+            type: string
+      summary: Create a new supervisor
+      tags:
+      - supervisors
+  /supervisors/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a supervisor
+      parameters:
+      - description: Supervisor ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Supervisor eliminado correctamente
+          schema:
+            type: string
+        "500":
+          description: Error eliminando el supervisor
+          schema:
+            type: string
+      summary: Delete a supervisor
+      tags:
+      - supervisors
+    get:
+      consumes:
+      - application/json
+      description: Get supervisor by id
+      parameters:
+      - description: Supervisor ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/employees.GetSupervisorResponse'
+        "500":
+          description: Error obteniendo el supervisor
+          schema:
+            type: string
+      summary: Get supervisor by id
+      tags:
+      - supervisors
+    put:
+      consumes:
+      - application/json
+      description: Update a supervisor
+      parameters:
+      - description: Supervisor ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Supervisor object that needs to be updated
+        in: body
+        name: supervisor
+        required: true
+        schema:
+          $ref: '#/definitions/employees.UpdateSupervisorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Supervisor actualizado correctamente
+          schema:
+            type: string
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error actualizando el supervisor
+          schema:
+            type: string
+      summary: Update a supervisor
+      tags:
+      - supervisors
+  /supervisors/activate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Activate a new supervisor
+      parameters:
+      - description: Supervisor ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Supervisor activado correctamente
+          schema:
+            type: string
+        "500":
+          description: Error activando el supervisor
+          schema:
+            type: string
+      summary: Activate a new supervisor
+      tags:
+      - supervisors
+  /supervisors/deactivate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Deactivate a supervisor
+      parameters:
+      - description: Supervisor ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Supervisor desactivado correctamente
+          schema:
+            type: string
+        "500":
+          description: Error desactivando el supervisor
+          schema:
+            type: string
+      summary: Deactivate a supervisor
+      tags:
+      - supervisors
   /users/{id}:
     get:
       consumes:
