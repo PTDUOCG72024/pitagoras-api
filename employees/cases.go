@@ -20,75 +20,75 @@ func NewCases(logger *zap.Logger, repository Repository) Cases {
 }
 
 // ActivateEmployee implements Cases.
-func (c *cases) ActivateEmployee(ctx context.Context, id string) (*Employee, error) {
+func (c *cases) ActivateEmployee(ctx context.Context, id string) error {
 	employee, err := c.repository.GetEmployeeById(ctx, id)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	employee.IsActive = true
 	employee.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdateEmployee(ctx, employee); err != nil {
-		return nil, err
+		return err
 	}
 
-	return employee, nil
+	return nil
 }
 
 // ActivateNationality implements Cases.
-func (c *cases) ActivateNationality(ctx context.Context, id string) (*Nationality, error) {
+func (c *cases) ActivateNationality(ctx context.Context, id string) error {
 	nationality, err := c.repository.GetNationalityById(ctx, id)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	nationality.IsActive = true
 	nationality.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdateNationality(ctx, nationality); err != nil {
-		return nil, err
+		return err
 	}
 
-	return nationality, nil
+	return nil
 }
 
 // ActivatePosition implements Cases.
-func (c *cases) ActivatePosition(ctx context.Context, id string) (*Position, error) {
+func (c *cases) ActivatePosition(ctx context.Context, id string) error {
 	position, err := c.repository.GetPositionById(ctx, id)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	position.IsActive = true
 	position.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdatePosition(ctx, position); err != nil {
-		return nil, err
+		return err
 	}
 
-	return position, nil
+	return nil
 }
 
 // ActivateSupervisor implements Cases.
-func (c *cases) ActivateSupervisor(ctx context.Context, id string) (*Supervisor, error) {
+func (c *cases) ActivateSupervisor(ctx context.Context, id string) error {
 	supervisor, err := c.repository.GetSupervisorById(ctx, id)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	supervisor.IsActive = true
 	supervisor.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdateSupervisor(ctx, supervisor); err != nil {
-		return nil, err
+		return err
 	}
 
-	return supervisor, nil
+	return nil
 }
 
 // CreateEmployee implements Cases.
@@ -99,23 +99,44 @@ func (c *cases) CreateEmployee(ctx context.Context, employee *Employee) (*Employ
 		return nil, err
 	}
 
-	_, err = c.repository.GetSupervisorById(ctx, employee.Supervisor.ID.Hex())
+	supervisor, err := c.repository.GetSupervisorById(ctx, employee.Supervisor.ID.Hex())
 
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = c.repository.GetPositionById(ctx, employee.Position.ID.Hex())
+	employee.Supervisor.Name = supervisor.Name
+	employee.Supervisor.IsActive = supervisor.IsActive
+	employee.Supervisor.IsDeleted = supervisor.IsDeleted
+	employee.Supervisor.CreatedAt = supervisor.CreatedAt
+	employee.Supervisor.UpdatedAt = supervisor.UpdatedAt
+	employee.Supervisor.DeleteAt = supervisor.DeleteAt
+
+	position, err := c.repository.GetPositionById(ctx, employee.Position.ID.Hex())
 
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = c.repository.GetNationalityById(ctx, employee.Nationality.ID.Hex())
+	employee.Position.Name = position.Name
+	employee.Position.IsActive = position.IsActive
+	employee.Position.IsDeleted = position.IsDeleted
+	employee.Position.CreatedAt = position.CreatedAt
+	employee.Position.UpdatedAt = position.UpdatedAt
+	employee.Position.DeleteAt = position.DeleteAt
+
+	nationality, err := c.repository.GetNationalityById(ctx, employee.Nationality.ID.Hex())
 
 	if err != nil {
 		return nil, err
 	}
+
+	employee.Nationality.Name = nationality.Name
+	employee.Nationality.IsActive = nationality.IsActive
+	employee.Nationality.IsDeleted = nationality.IsDeleted
+	employee.Nationality.CreatedAt = nationality.CreatedAt
+	employee.Nationality.UpdatedAt = nationality.UpdatedAt
+	employee.Nationality.DeleteAt = nationality.DeleteAt
 
 	employee.CreatedAt = time.Now()
 	employee.UpdatedAt = time.Now()
@@ -190,75 +211,75 @@ func (c *cases) CreateSupervisor(ctx context.Context, supervisor *Supervisor) (*
 }
 
 // DeactivateEmployee implements Cases.
-func (c *cases) DeactivateEmployee(ctx context.Context, id string) (*Employee, error) {
+func (c *cases) DeactivateEmployee(ctx context.Context, id string) error {
 	employee, err := c.repository.GetEmployeeById(ctx, id)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	employee.IsActive = false
 	employee.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdateEmployee(ctx, employee); err != nil {
-		return nil, err
+		return err
 	}
 
-	return employee, nil
+	return nil
 }
 
 // DeactivateNationality implements Cases.
-func (c *cases) DeactivateNationality(ctx context.Context, id string) (*Nationality, error) {
+func (c *cases) DeactivateNationality(ctx context.Context, id string) error {
 	nationality, err := c.repository.GetNationalityById(ctx, id)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	nationality.IsActive = false
 	nationality.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdateNationality(ctx, nationality); err != nil {
-		return nil, err
+		return err
 	}
 
-	return nationality, nil
+	return nil
 }
 
 // DeactivatePosition implements Cases.
-func (c *cases) DeactivatePosition(ctx context.Context, id string) (*Position, error) {
+func (c *cases) DeactivatePosition(ctx context.Context, id string) error {
 	position, err := c.repository.GetPositionById(ctx, id)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	position.IsActive = false
 	position.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdatePosition(ctx, position); err != nil {
-		return nil, err
+		return err
 	}
 
-	return position, nil
+	return nil
 }
 
 // DeactivateSupervisor implements Cases.
-func (c *cases) DeactivateSupervisor(ctx context.Context, id string) (*Supervisor, error) {
+func (c *cases) DeactivateSupervisor(ctx context.Context, id string) error {
 	supervisor, err := c.repository.GetSupervisorById(ctx, id)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	supervisor.IsActive = false
 	supervisor.UpdatedAt = time.Now()
 
 	if err := c.repository.UpdateSupervisor(ctx, supervisor); err != nil {
-		return nil, err
+		return err
 	}
 
-	return supervisor, nil
+	return nil
 }
 
 // DeleteEmployee implements Cases.

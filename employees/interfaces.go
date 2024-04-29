@@ -46,32 +46,32 @@ type Cases interface {
 	GetEmployees(ctx context.Context) ([]Employee, error)
 	UpdateEmployee(ctx context.Context, id string, employee *Employee) error
 	DeleteEmployee(ctx context.Context, id string) error
-	ActivateEmployee(ctx context.Context, id string) (*Employee, error)
-	DeactivateEmployee(ctx context.Context, id string) (*Employee, error)
+	ActivateEmployee(ctx context.Context, id string) error
+	DeactivateEmployee(ctx context.Context, id string) error
 
 	CreateSupervisor(ctx context.Context, supervisor *Supervisor) (*Supervisor, error)
 	GetSupervisorById(ctx context.Context, id string) (*Supervisor, error)
 	GetSupervisors(ctx context.Context) ([]Supervisor, error)
 	UpdateSupervisor(ctx context.Context, id string, supervisor *Supervisor) error
 	DeleteSupervisor(ctx context.Context, id string) error
-	ActivateSupervisor(ctx context.Context, id string) (*Supervisor, error)
-	DeactivateSupervisor(ctx context.Context, id string) (*Supervisor, error)
+	ActivateSupervisor(ctx context.Context, id string) error
+	DeactivateSupervisor(ctx context.Context, id string) error
 
 	CreatePosition(ctx context.Context, position *Position) (*Position, error)
 	GetPositionById(ctx context.Context, id string) (*Position, error)
 	GetPositions(ctx context.Context) ([]Position, error)
 	UpdatePosition(ctx context.Context, id string, position *Position) error
 	DeletePosition(ctx context.Context, id string) error
-	ActivatePosition(ctx context.Context, id string) (*Position, error)
-	DeactivatePosition(ctx context.Context, id string) (*Position, error)
+	ActivatePosition(ctx context.Context, id string) error
+	DeactivatePosition(ctx context.Context, id string) error
 
 	CreateNationality(ctx context.Context, nationality *Nationality) (*Nationality, error)
 	GetNationalityById(ctx context.Context, id string) (*Nationality, error)
 	GetNationalities(ctx context.Context) ([]Nationality, error)
 	UpdateNationality(ctx context.Context, id string, nationality *Nationality) error
 	DeleteNationality(ctx context.Context, id string) error
-	ActivateNationality(ctx context.Context, id string) (*Nationality, error)
-	DeactivateNationality(ctx context.Context, id string) (*Nationality, error)
+	ActivateNationality(ctx context.Context, id string) error
+	DeactivateNationality(ctx context.Context, id string) error
 }
 
 type Repository interface {

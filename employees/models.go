@@ -14,8 +14,8 @@ type Employee struct {
 	Email                string             `bson:"email,omitempty" json:"email"`
 	InLaw                bool               `bson:"in_law,omitempty" json:"in_law"`
 	ContractType         string             `bson:"contract_type,omitempty" json:"contract_type"`
-	StartDate            primitive.DateTime `bson:"start_date,omitempty" json:"start_date"`
-	EndDate              primitive.DateTime `bson:"end_date,omitempty" json:"end_date"`
+	StartDate            time.Time          `bson:"start_date,omitempty" json:"start_date"`
+	EndDate              time.Time          `bson:"end_date,omitempty" json:"end_date"`
 	Supervisor           Supervisor         `bson:"supervisor,omitempty" json:"supervisor"`
 	Position             Position           `bson:"position,omitempty" json:"position"`
 	Nationality          Nationality        `bson:"nationality,omitempty" json:"nationality"`
