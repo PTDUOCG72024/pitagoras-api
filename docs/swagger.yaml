@@ -1360,6 +1360,24 @@ paths:
       tags:
       - employees
   /gravities/:
+    get:
+      consumes:
+      - application/json
+      description: Get all gravities
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gravedades obtenidas correctamente
+          schema:
+            $ref: '#/definitions/accidents.GetGravityByIdResponse'
+        "500":
+          description: Error obteniendo las gravedades
+          schema:
+            type: string
+      summary: Get all gravities
+      tags:
+      - gravities
     post:
       consumes:
       - application/json

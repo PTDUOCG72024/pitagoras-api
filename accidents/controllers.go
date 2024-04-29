@@ -174,6 +174,9 @@ func (c *controller) CreateClassification(ctx *fiber.Ctx) error {
 	response := new(CreateClassificationResponse)
 	response.ID = result.ID
 	response.Name = result.Name
+	response.IsActive = result.IsActive
+	response.IsDeleted = result.IsDeleted
+	response.CreatedAt = result.CreatedAt
 
 	return ctx.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message":        "Clasificación creada correctamente",
@@ -214,6 +217,9 @@ func (c *controller) CreateGravity(ctx *fiber.Ctx) error {
 	response := new(CreateGravityResponse)
 	response.ID = result.ID
 	response.Name = result.Name
+	response.IsActive = result.IsActive
+	response.IsDeleted = result.IsDeleted
+	response.CreatedAt = result.CreatedAt
 
 	return ctx.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message": "Gravedad creada correctamente",
@@ -254,6 +260,9 @@ func (c *controller) CreateInjuredPart(ctx *fiber.Ctx) error {
 	response := new(CreateInjuredPartResponse)
 	response.ID = result.ID
 	response.Name = result.Name
+	response.IsActive = result.IsActive
+	response.IsDeleted = result.IsDeleted
+	response.CreatedAt = result.CreatedAt
 
 	return ctx.Status(fiber.StatusCreated).JSON(fiber.Map{
 		"message":      "Parte lesionada creada correctamente",
@@ -583,16 +592,15 @@ func (c *controller) GetClassifications(ctx *fiber.Ctx) error {
 	})
 }
 
-// GetGravityById godoc
-// @Summary Get a Gravity by id
-// @Description Get a Gravity by id
+// GetGravities godoc
+// @Summary Get all gravities
+// @Description Get all gravities
 // @Tags gravities
 // @Accept json
 // @Produce json
-// @Param id path string true "Gravity ID"
-// @Success 200 {object} GetGravityByIdResponse "Gravedad obtenida correctamente"
-// @Failure 500 {string} string "Error obteniendo la gravedad"
-// @Router /gravities/{id} [get]
+// @Success 200 {object} GetGravityByIdResponse "Gravedades obtenidas correctamente"
+// @Failure 500 {string} string "Error obteniendo las gravedades"
+// @Router /gravities/ [get]
 func (c *controller) GetGravities(ctx *fiber.Ctx) error {
 	result, err := c.cases.GetGravities(ctx.Context())
 	if err != nil {
@@ -620,16 +628,16 @@ func (c *controller) GetGravities(ctx *fiber.Ctx) error {
 	})
 }
 
-// GetInjuredPartById godoc
-// @Summary Get a InjuredPart by id
-// @Description Get a InjuredPart by id
-// @Tags injured-parts
+// GetGravityById godoc
+// @Summary Get a Gravity by id
+// @Description Get a Gravity by id
+// @Tags gravities
 // @Accept json
 // @Produce json
-// @Param id path string true "InjuredPart ID"
-// @Success 200 {object} GetInjuredPartByIdResponse "Parte lesionada obtenida correctamente"
-// @Failure 500 {string} string "Error obteniendo la parte lesionada"
-// @Router /injured-parts/{id} [get]
+// @Param id path string true "Gravity ID"
+// @Success 200 {object} GetGravityByIdResponse "Gravedad obtenida correctamente"
+// @Failure 500 {string} string "Error obteniendo la gravedad"
+// @Router /gravities/{id} [get]
 func (c *controller) GetGravityById(ctx *fiber.Ctx) error {
 	gravityID := ctx.Params("id")
 

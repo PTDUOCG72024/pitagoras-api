@@ -883,6 +883,33 @@ const docTemplate = `{
             }
         },
         "/gravities/": {
+            "get": {
+                "description": "Get all gravities",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gravities"
+                ],
+                "summary": "Get all gravities",
+                "responses": {
+                    "200": {
+                        "description": "Gravedades obtenidas correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.GetGravityByIdResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo las gravedades",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Create a new Gravity",
                 "consumes": [
