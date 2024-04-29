@@ -1,5 +1,268 @@
 basePath: /
 definitions:
+  accidents.Classification:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  accidents.CreateAccidentRequest:
+    properties:
+      accident_date:
+        type: string
+      classification_id:
+        type: string
+      construction_area:
+        type: string
+      description:
+        type: string
+      employee_id:
+        type: string
+      gravity_id:
+        type: string
+      injured_part_id:
+        type: string
+      project_id:
+        type: string
+    type: object
+  accidents.CreateAccidentResponse:
+    properties:
+      accident_date:
+        type: string
+      classification:
+        $ref: '#/definitions/accidents.Classification'
+      construction_area:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      employee:
+        $ref: '#/definitions/employees.Employee'
+      gravity:
+        $ref: '#/definitions/accidents.Gravity'
+      id:
+        type: string
+      injured_part:
+        $ref: '#/definitions/accidents.InjuredPart'
+      is_deleted:
+        type: boolean
+      project:
+        $ref: '#/definitions/projects.Project'
+    type: object
+  accidents.CreateClassificationRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  accidents.CreateClassificationResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+    type: object
+  accidents.CreateGravityRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  accidents.CreateGravityResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+    type: object
+  accidents.CreateInjuredPartRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  accidents.CreateInjuredPartResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+    type: object
+  accidents.GetAccidentByIdResponse:
+    properties:
+      accident_date:
+        type: string
+      classification:
+        $ref: '#/definitions/accidents.Classification'
+      construction_area:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      description:
+        type: string
+      employee:
+        $ref: '#/definitions/employees.Employee'
+      gravity:
+        $ref: '#/definitions/accidents.Gravity'
+      id:
+        type: string
+      injured_part:
+        $ref: '#/definitions/accidents.InjuredPart'
+      is_deleted:
+        type: boolean
+      project:
+        $ref: '#/definitions/projects.Project'
+      updated_at:
+        type: string
+    type: object
+  accidents.GetClassificationByIdResponse:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  accidents.GetGravityByIdResponse:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  accidents.GetInjuredPartByIdResponse:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  accidents.Gravity:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  accidents.InjuredPart:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  accidents.UpdateAccidentRequest:
+    properties:
+      accident_date:
+        type: string
+      classification_id:
+        type: string
+      construction_area:
+        type: string
+      description:
+        type: string
+      employee_id:
+        type: string
+      gravity_id:
+        type: string
+      injured_part_id:
+        type: string
+      project_id:
+        type: string
+    type: object
+  accidents.UpdateClassificationRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  accidents.UpdateGravityRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  accidents.UpdateInjuredPartRequest:
+    properties:
+      name:
+        type: string
+    type: object
   employees.CreateEmployeeRequest:
     properties:
       contract_type:
@@ -110,6 +373,45 @@ definitions:
       is_deleted:
         type: boolean
       name:
+        type: string
+    type: object
+  employees.Employee:
+    properties:
+      contract_type:
+        type: string
+      created_at:
+        default: now()
+        type: string
+      delete_at:
+        type: string
+      email:
+        type: string
+      end_date:
+        type: string
+      id:
+        type: string
+      identification_number:
+        type: string
+      identification_type:
+        type: string
+      in_law:
+        type: boolean
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      nationality:
+        $ref: '#/definitions/employees.Nationality'
+      position:
+        $ref: '#/definitions/employees.Position'
+      start_date:
+        type: string
+      supervisor:
+        $ref: '#/definitions/employees.Supervisor'
+      updated_at:
+        default: now()
         type: string
     type: object
   employees.GetEmployeeResponse:
@@ -348,6 +650,31 @@ definitions:
       updated_at:
         type: string
     type: object
+  projects.Project:
+    properties:
+      created_at:
+        default: now()
+        type: string
+      delete_at:
+        type: string
+      description:
+        type: string
+      end_date:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      is_deleted:
+        type: boolean
+      name:
+        type: string
+      start_date:
+        type: string
+      updated_at:
+        default: now()
+        type: string
+    type: object
   projects.UpdateProjectRequest:
     properties:
       description:
@@ -465,6 +792,137 @@ info:
   title: GoFiber Pitagoras API
   version: "1.0"
 paths:
+  /accidents/:
+    get:
+      consumes:
+      - application/json
+      description: Get all accidents
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Accidentes obtenidos correctamente
+          schema:
+            $ref: '#/definitions/accidents.GetAccidentByIdResponse'
+        "500":
+          description: Error obteniendo los accidentes
+          schema:
+            type: string
+      summary: Get all accidents
+      tags:
+      - accidents
+    post:
+      consumes:
+      - application/json
+      description: Create a new accident
+      parameters:
+      - description: Create Accident Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/accidents.CreateAccidentRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Accidente creado correctamente
+          schema:
+            $ref: '#/definitions/accidents.CreateAccidentResponse'
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error creando el accidente
+          schema:
+            type: string
+      summary: Create a new accident
+      tags:
+      - accidents
+  /accidents/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an accident
+      parameters:
+      - description: Accident ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Accidente eliminado correctamente
+          schema:
+            type: string
+        "500":
+          description: Error eliminando el accidente
+          schema:
+            type: string
+      summary: Delete an accident
+      tags:
+      - accidents
+    get:
+      consumes:
+      - application/json
+      description: Get an accident by id
+      parameters:
+      - description: Accident ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Accidente obtenido correctamente
+          schema:
+            $ref: '#/definitions/accidents.GetAccidentByIdResponse'
+        "500":
+          description: Error obteniendo el accidente
+          schema:
+            type: string
+      summary: Get an accident by id
+      tags:
+      - accidents
+    put:
+      consumes:
+      - application/json
+      description: Update an accident
+      parameters:
+      - description: Accident ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Accident Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/accidents.UpdateAccidentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Accidente actualizado correctamente
+          schema:
+            type: string
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error actualizando el accidente
+          schema:
+            type: string
+      summary: Update an accident
+      tags:
+      - accidents
   /auth/login:
     post:
       consumes:
@@ -537,6 +995,187 @@ paths:
       summary: register new user
       tags:
       - users
+  /classifications/:
+    get:
+      consumes:
+      - application/json
+      description: Get all classifications
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Clasificaciones obtenidas correctamente
+          schema:
+            $ref: '#/definitions/accidents.GetClassificationByIdResponse'
+        "500":
+          description: Error obteniendo las clasificaciones
+          schema:
+            type: string
+      summary: Get all classifications
+      tags:
+      - classifications
+    post:
+      consumes:
+      - application/json
+      description: Create a new Classification
+      parameters:
+      - description: Create Classification Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/accidents.CreateClassificationRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Clasificación creada correctamente
+          schema:
+            $ref: '#/definitions/accidents.CreateClassificationResponse'
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error creando la clasificación
+          schema:
+            type: string
+      summary: Create a new Classification
+      tags:
+      - classifications
+  /classifications/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a Classification
+      parameters:
+      - description: Classification ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Clasificación eliminada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error eliminando la clasificación
+          schema:
+            type: string
+      summary: Delete a Classification
+      tags:
+      - classifications
+    get:
+      consumes:
+      - application/json
+      description: Get a Classification by id
+      parameters:
+      - description: Classification ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Clasificación obtenida correctamente
+          schema:
+            $ref: '#/definitions/accidents.GetClassificationByIdResponse'
+        "500":
+          description: Error obteniendo la clasificación
+          schema:
+            type: string
+      summary: Get a Classification by id
+      tags:
+      - classifications
+    put:
+      consumes:
+      - application/json
+      description: Update a Classification
+      parameters:
+      - description: Classification ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Classification Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/accidents.UpdateClassificationRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Clasificación actualizada correctamente
+          schema:
+            type: string
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error actualizando la clasificación
+          schema:
+            type: string
+      summary: Update a Classification
+      tags:
+      - classifications
+  /classifications/activate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Activate a Classification
+      parameters:
+      - description: Classification ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Clasificación activada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error activando la clasificación
+          schema:
+            type: string
+      summary: Activate a Classification
+      tags:
+      - classifications
+  /classifications/deactivate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Deactivate a Classification
+      parameters:
+      - description: Classification ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Clasificación desactivada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error desactivando la clasificación
+          schema:
+            type: string
+      summary: Deactivate a Classification
+      tags:
+      - classifications
   /employees:
     get:
       consumes:
@@ -720,6 +1359,350 @@ paths:
       summary: Deactivate a employee
       tags:
       - employees
+  /gravities/:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Gravity
+      parameters:
+      - description: Create Gravity Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/accidents.CreateGravityRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Gravedad creada correctamente
+          schema:
+            $ref: '#/definitions/accidents.CreateGravityResponse'
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error creando la gravedad
+          schema:
+            type: string
+      summary: Create a new Gravity
+      tags:
+      - gravities
+  /gravities/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a Gravity
+      parameters:
+      - description: Gravity ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gravedad eliminada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error eliminando la gravedad
+          schema:
+            type: string
+      summary: Delete a Gravity
+      tags:
+      - gravities
+    get:
+      consumes:
+      - application/json
+      description: Get a Gravity by id
+      parameters:
+      - description: Gravity ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gravedad obtenida correctamente
+          schema:
+            $ref: '#/definitions/accidents.GetGravityByIdResponse'
+        "500":
+          description: Error obteniendo la gravedad
+          schema:
+            type: string
+      summary: Get a Gravity by id
+      tags:
+      - gravities
+    put:
+      consumes:
+      - application/json
+      description: Update a Gravity
+      parameters:
+      - description: Gravity ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Gravity Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/accidents.UpdateGravityRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gravedad actualizada correctamente
+          schema:
+            type: string
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error actualizando la gravedad
+          schema:
+            type: string
+      summary: Update a Gravity
+      tags:
+      - gravities
+  /gravities/activate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Activate a Gravity
+      parameters:
+      - description: Gravity ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gravedad activada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error activando la gravedad
+          schema:
+            type: string
+      summary: Activate a Gravity
+      tags:
+      - gravities
+  /gravities/deactivate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Deactivate a Gravity
+      parameters:
+      - description: Gravity ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Gravedad desactivada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error desactivando la gravedad
+          schema:
+            type: string
+      summary: Deactivate a Gravity
+      tags:
+      - gravities
+  /injured-parts/:
+    get:
+      consumes:
+      - application/json
+      description: Get all injured parts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Partes lesionadas obtenidas correctamente
+          schema:
+            $ref: '#/definitions/accidents.GetInjuredPartByIdResponse'
+        "500":
+          description: Error obteniendo las partes lesionadas
+          schema:
+            type: string
+      summary: Get all injured parts
+      tags:
+      - injured-parts
+    post:
+      consumes:
+      - application/json
+      description: Create a new InjuredPart
+      parameters:
+      - description: Create InjuredPart Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/accidents.CreateInjuredPartRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Parte lesionada creada correctamente
+          schema:
+            $ref: '#/definitions/accidents.CreateInjuredPartResponse'
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error creando la parte lesionada
+          schema:
+            type: string
+      summary: Create a new InjuredPart
+      tags:
+      - injured-parts
+  /injured-parts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a InjuredPart
+      parameters:
+      - description: InjuredPart ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Parte lesionada eliminada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error eliminando la parte lesionada
+          schema:
+            type: string
+      summary: Delete a InjuredPart
+      tags:
+      - injured-parts
+    get:
+      consumes:
+      - application/json
+      description: Get a InjuredPart by id
+      parameters:
+      - description: InjuredPart ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Parte lesionada obtenida correctamente
+          schema:
+            $ref: '#/definitions/accidents.GetInjuredPartByIdResponse'
+        "500":
+          description: Error obteniendo la parte lesionada
+          schema:
+            type: string
+      summary: Get a InjuredPart by id
+      tags:
+      - injured-parts
+    put:
+      consumes:
+      - application/json
+      description: Update a InjuredPart
+      parameters:
+      - description: InjuredPart ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update InjuredPart Request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/accidents.UpdateInjuredPartRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Parte lesionada actualizada correctamente
+          schema:
+            type: string
+        "400":
+          description: Error validando el cuerpo de la petición
+          schema:
+            type: string
+        "500":
+          description: Error actualizando la parte lesionada
+          schema:
+            type: string
+      summary: Update a InjuredPart
+      tags:
+      - injured-parts
+  /injured-parts/activate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Activate a InjuredPart
+      parameters:
+      - description: InjuredPart ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Parte lesionada activada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error activando la parte lesionada
+          schema:
+            type: string
+      summary: Activate a InjuredPart
+      tags:
+      - injured-parts
+  /injured-parts/deactivate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Deactivate a InjuredPart
+      parameters:
+      - description: InjuredPart ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Parte lesionada desactivada correctamente
+          schema:
+            type: string
+        "500":
+          description: Error desactivando la parte lesionada
+          schema:
+            type: string
+      summary: Deactivate a InjuredPart
+      tags:
+      - injured-parts
   /nationalities:
     get:
       consumes:

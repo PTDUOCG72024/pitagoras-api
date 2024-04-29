@@ -17,6 +17,204 @@
     "host": "pitagoras-api-production.up.railway.app",
     "basePath": "/",
     "paths": {
+        "/accidents/": {
+            "get": {
+                "description": "Get all accidents",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accidents"
+                ],
+                "summary": "Get all accidents",
+                "responses": {
+                    "200": {
+                        "description": "Accidentes obtenidos correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.GetAccidentByIdResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo los accidentes",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new accident",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accidents"
+                ],
+                "summary": "Create a new accident",
+                "parameters": [
+                    {
+                        "description": "Create Accident Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/accidents.CreateAccidentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Accidente creado correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.CreateAccidentResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error validando el cuerpo de la petición",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error creando el accidente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accidents/{id}": {
+            "get": {
+                "description": "Get an accident by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accidents"
+                ],
+                "summary": "Get an accident by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Accident ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Accidente obtenido correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.GetAccidentByIdResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo el accidente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update an accident",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accidents"
+                ],
+                "summary": "Update an accident",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Accident ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Accident Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/accidents.UpdateAccidentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Accidente actualizado correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Error validando el cuerpo de la petición",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error actualizando el accidente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete an accident",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accidents"
+                ],
+                "summary": "Delete an accident",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Accident ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Accidente eliminado correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error eliminando el accidente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/auth/login": {
             "post": {
                 "description": "login user",
@@ -120,6 +318,280 @@
                     },
                     "500": {
                         "description": "Error creando el usuario",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/classifications/": {
+            "get": {
+                "description": "Get all classifications",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "classifications"
+                ],
+                "summary": "Get all classifications",
+                "responses": {
+                    "200": {
+                        "description": "Clasificaciones obtenidas correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.GetClassificationByIdResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo las clasificaciones",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new Classification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "classifications"
+                ],
+                "summary": "Create a new Classification",
+                "parameters": [
+                    {
+                        "description": "Create Classification Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/accidents.CreateClassificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Clasificación creada correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.CreateClassificationResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error validando el cuerpo de la petición",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error creando la clasificación",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/classifications/activate/{id}": {
+            "put": {
+                "description": "Activate a Classification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "classifications"
+                ],
+                "summary": "Activate a Classification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Classification ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Clasificación activada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error activando la clasificación",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/classifications/deactivate/{id}": {
+            "put": {
+                "description": "Deactivate a Classification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "classifications"
+                ],
+                "summary": "Deactivate a Classification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Classification ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Clasificación desactivada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error desactivando la clasificación",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/classifications/{id}": {
+            "get": {
+                "description": "Get a Classification by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "classifications"
+                ],
+                "summary": "Get a Classification by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Classification ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Clasificación obtenida correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.GetClassificationByIdResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo la clasificación",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a Classification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "classifications"
+                ],
+                "summary": "Update a Classification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Classification ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Classification Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/accidents.UpdateClassificationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Clasificación actualizada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Error validando el cuerpo de la petición",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error actualizando la clasificación",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a Classification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "classifications"
+                ],
+                "summary": "Delete a Classification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Classification ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Clasificación eliminada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error eliminando la clasificación",
                         "schema": {
                             "type": "string"
                         }
@@ -397,6 +869,527 @@
                     },
                     "500": {
                         "description": "Error eliminando el empleado",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/gravities/": {
+            "post": {
+                "description": "Create a new Gravity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gravities"
+                ],
+                "summary": "Create a new Gravity",
+                "parameters": [
+                    {
+                        "description": "Create Gravity Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/accidents.CreateGravityRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Gravedad creada correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.CreateGravityResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error validando el cuerpo de la petición",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error creando la gravedad",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/gravities/activate/{id}": {
+            "put": {
+                "description": "Activate a Gravity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gravities"
+                ],
+                "summary": "Activate a Gravity",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Gravity ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Gravedad activada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error activando la gravedad",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/gravities/deactivate/{id}": {
+            "put": {
+                "description": "Deactivate a Gravity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gravities"
+                ],
+                "summary": "Deactivate a Gravity",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Gravity ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Gravedad desactivada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error desactivando la gravedad",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/gravities/{id}": {
+            "get": {
+                "description": "Get a Gravity by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gravities"
+                ],
+                "summary": "Get a Gravity by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Gravity ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Gravedad obtenida correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.GetGravityByIdResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo la gravedad",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a Gravity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gravities"
+                ],
+                "summary": "Update a Gravity",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Gravity ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Gravity Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/accidents.UpdateGravityRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Gravedad actualizada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Error validando el cuerpo de la petición",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error actualizando la gravedad",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a Gravity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gravities"
+                ],
+                "summary": "Delete a Gravity",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Gravity ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Gravedad eliminada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error eliminando la gravedad",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/injured-parts/": {
+            "get": {
+                "description": "Get all injured parts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "injured-parts"
+                ],
+                "summary": "Get all injured parts",
+                "responses": {
+                    "200": {
+                        "description": "Partes lesionadas obtenidas correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.GetInjuredPartByIdResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo las partes lesionadas",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new InjuredPart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "injured-parts"
+                ],
+                "summary": "Create a new InjuredPart",
+                "parameters": [
+                    {
+                        "description": "Create InjuredPart Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/accidents.CreateInjuredPartRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Parte lesionada creada correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.CreateInjuredPartResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error validando el cuerpo de la petición",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error creando la parte lesionada",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/injured-parts/activate/{id}": {
+            "put": {
+                "description": "Activate a InjuredPart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "injured-parts"
+                ],
+                "summary": "Activate a InjuredPart",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "InjuredPart ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Parte lesionada activada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error activando la parte lesionada",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/injured-parts/deactivate/{id}": {
+            "put": {
+                "description": "Deactivate a InjuredPart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "injured-parts"
+                ],
+                "summary": "Deactivate a InjuredPart",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "InjuredPart ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Parte lesionada desactivada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error desactivando la parte lesionada",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/injured-parts/{id}": {
+            "get": {
+                "description": "Get a InjuredPart by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "injured-parts"
+                ],
+                "summary": "Get a InjuredPart by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "InjuredPart ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Parte lesionada obtenida correctamente",
+                        "schema": {
+                            "$ref": "#/definitions/accidents.GetInjuredPartByIdResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo la parte lesionada",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update a InjuredPart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "injured-parts"
+                ],
+                "summary": "Update a InjuredPart",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "InjuredPart ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update InjuredPart Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/accidents.UpdateInjuredPartRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Parte lesionada actualizada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Error validando el cuerpo de la petición",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error actualizando la parte lesionada",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a InjuredPart",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "injured-parts"
+                ],
+                "summary": "Delete a InjuredPart",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "InjuredPart ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Parte lesionada eliminada correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error eliminando la parte lesionada",
                         "schema": {
                             "type": "string"
                         }
@@ -1765,6 +2758,410 @@
         }
     },
     "definitions": {
+        "accidents.Classification": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.CreateAccidentRequest": {
+            "type": "object",
+            "properties": {
+                "accident_date": {
+                    "type": "string"
+                },
+                "classification_id": {
+                    "type": "string"
+                },
+                "construction_area": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "employee_id": {
+                    "type": "string"
+                },
+                "gravity_id": {
+                    "type": "string"
+                },
+                "injured_part_id": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.CreateAccidentResponse": {
+            "type": "object",
+            "properties": {
+                "accident_date": {
+                    "type": "string"
+                },
+                "classification": {
+                    "$ref": "#/definitions/accidents.Classification"
+                },
+                "construction_area": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "employee": {
+                    "$ref": "#/definitions/employees.Employee"
+                },
+                "gravity": {
+                    "$ref": "#/definitions/accidents.Gravity"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "injured_part": {
+                    "$ref": "#/definitions/accidents.InjuredPart"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "project": {
+                    "$ref": "#/definitions/projects.Project"
+                }
+            }
+        },
+        "accidents.CreateClassificationRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.CreateClassificationResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.CreateGravityRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.CreateGravityResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.CreateInjuredPartRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.CreateInjuredPartResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.GetAccidentByIdResponse": {
+            "type": "object",
+            "properties": {
+                "accident_date": {
+                    "type": "string"
+                },
+                "classification": {
+                    "$ref": "#/definitions/accidents.Classification"
+                },
+                "construction_area": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "employee": {
+                    "$ref": "#/definitions/employees.Employee"
+                },
+                "gravity": {
+                    "$ref": "#/definitions/accidents.Gravity"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "injured_part": {
+                    "$ref": "#/definitions/accidents.InjuredPart"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "project": {
+                    "$ref": "#/definitions/projects.Project"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.GetClassificationByIdResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.GetGravityByIdResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.GetInjuredPartByIdResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.Gravity": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.InjuredPart": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.UpdateAccidentRequest": {
+            "type": "object",
+            "properties": {
+                "accident_date": {
+                    "type": "string"
+                },
+                "classification_id": {
+                    "type": "string"
+                },
+                "construction_area": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "employee_id": {
+                    "type": "string"
+                },
+                "gravity_id": {
+                    "type": "string"
+                },
+                "injured_part_id": {
+                    "type": "string"
+                },
+                "project_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.UpdateClassificationRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.UpdateGravityRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "accidents.UpdateInjuredPartRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "employees.CreateEmployeeRequest": {
             "type": "object",
             "properties": {
@@ -1934,6 +3331,64 @@
                 },
                 "name": {
                     "type": "string"
+                }
+            }
+        },
+        "employees.Employee": {
+            "type": "object",
+            "properties": {
+                "contract_type": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string",
+                    "default": "now()"
+                },
+                "delete_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identification_number": {
+                    "type": "string"
+                },
+                "identification_type": {
+                    "type": "string"
+                },
+                "in_law": {
+                    "type": "boolean"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nationality": {
+                    "$ref": "#/definitions/employees.Nationality"
+                },
+                "position": {
+                    "$ref": "#/definitions/employees.Position"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "supervisor": {
+                    "$ref": "#/definitions/employees.Supervisor"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "default": "now()"
                 }
             }
         },
@@ -2292,6 +3747,43 @@
                 },
                 "updated_at": {
                     "type": "string"
+                }
+            }
+        },
+        "projects.Project": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "default": "now()"
+                },
+                "delete_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "is_deleted": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "default": "now()"
                 }
             }
         },
