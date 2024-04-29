@@ -23,7 +23,7 @@ func NewCases(logger *zap.Logger, repository Repository) Cases {
 
 // ActivateEmployee implements Cases.
 func (c *cases) ActivateEmployee(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	employee, err := c.repository.GetEmployeeById(ctx, objID)
 
 	if err != nil {
@@ -33,16 +33,12 @@ func (c *cases) ActivateEmployee(ctx context.Context, id string) error {
 	employee.IsActive = true
 	employee.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateEmployee(ctx, employee); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateEmployee(ctx, employee)
 }
 
 // ActivateNationality implements Cases.
 func (c *cases) ActivateNationality(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	nationality, err := c.repository.GetNationalityById(ctx, objID)
 
 	if err != nil {
@@ -52,16 +48,12 @@ func (c *cases) ActivateNationality(ctx context.Context, id string) error {
 	nationality.IsActive = true
 	nationality.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateNationality(ctx, nationality); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateNationality(ctx, nationality)
 }
 
 // ActivatePosition implements Cases.
 func (c *cases) ActivatePosition(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	position, err := c.repository.GetPositionById(ctx, objID)
 
 	if err != nil {
@@ -71,16 +63,12 @@ func (c *cases) ActivatePosition(ctx context.Context, id string) error {
 	position.IsActive = true
 	position.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdatePosition(ctx, position); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdatePosition(ctx, position)
 }
 
 // ActivateSupervisor implements Cases.
 func (c *cases) ActivateSupervisor(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	supervisor, err := c.repository.GetSupervisorById(ctx, objID)
 
 	if err != nil {
@@ -90,16 +78,12 @@ func (c *cases) ActivateSupervisor(ctx context.Context, id string) error {
 	supervisor.IsActive = true
 	supervisor.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateSupervisor(ctx, supervisor); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateSupervisor(ctx, supervisor)
 }
 
 // CreateEmployee implements Cases.
 func (c *cases) CreateEmployee(ctx context.Context, employee *Employee) (*Employee, error) {
-	emp, err := c.repository.GetEmployeeByIdentificationNumber(ctx, employee.IdentificationNumber)
+	emp, _ := c.repository.GetEmployeeByIdentificationNumber(ctx, employee.IdentificationNumber)
 
 	if emp != nil {
 		return nil, errors.New("el empleado ya existe")
@@ -148,17 +132,12 @@ func (c *cases) CreateEmployee(ctx context.Context, employee *Employee) (*Employ
 	employee.UpdatedAt = time.Now()
 	employee.IsActive = true
 
-	result, err := c.repository.CreateEmployee(ctx, employee)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return c.repository.CreateEmployee(ctx, employee)
 }
 
 // CreateNationality implements Cases.
 func (c *cases) CreateNationality(ctx context.Context, nationality *Nationality) (*Nationality, error) {
-	nat, err := c.repository.GetNationalityByName(ctx, nationality.Name)
+	nat, _ := c.repository.GetNationalityByName(ctx, nationality.Name)
 
 	if nat != nil {
 		return nil, errors.New("la nacionalidad ya existe")
@@ -168,12 +147,7 @@ func (c *cases) CreateNationality(ctx context.Context, nationality *Nationality)
 	nationality.UpdatedAt = time.Now()
 	nationality.IsActive = true
 
-	result, err := c.repository.CreateNationality(ctx, nationality)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return c.repository.CreateNationality(ctx, nationality)
 }
 
 // CreatePosition implements Cases.
@@ -188,17 +162,12 @@ func (c *cases) CreatePosition(ctx context.Context, position *Position) (*Positi
 	position.UpdatedAt = time.Now()
 	position.IsActive = true
 
-	result, err := c.repository.CreatePosition(ctx, position)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return c.repository.CreatePosition(ctx, position)
 }
 
 // CreateSupervisor implements Cases.
 func (c *cases) CreateSupervisor(ctx context.Context, supervisor *Supervisor) (*Supervisor, error) {
-	sup, err := c.repository.GetSupervisorByName(ctx, supervisor.Name)
+	sup, _ := c.repository.GetSupervisorByName(ctx, supervisor.Name)
 
 	if sup != nil {
 		return nil, errors.New("el supervisor ya existe")
@@ -208,17 +177,12 @@ func (c *cases) CreateSupervisor(ctx context.Context, supervisor *Supervisor) (*
 	supervisor.UpdatedAt = time.Now()
 	supervisor.IsActive = true
 
-	result, err := c.repository.CreateSupervisor(ctx, supervisor)
-	if err != nil {
-		return nil, err
-	}
-
-	return result, nil
+	return c.repository.CreateSupervisor(ctx, supervisor)
 }
 
 // DeactivateEmployee implements Cases.
 func (c *cases) DeactivateEmployee(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	employee, err := c.repository.GetEmployeeById(ctx, objID)
 
 	if err != nil {
@@ -228,16 +192,12 @@ func (c *cases) DeactivateEmployee(ctx context.Context, id string) error {
 	employee.IsActive = false
 	employee.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateEmployee(ctx, employee); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateEmployee(ctx, employee)
 }
 
 // DeactivateNationality implements Cases.
 func (c *cases) DeactivateNationality(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	nationality, err := c.repository.GetNationalityById(ctx, objID)
 
 	if err != nil {
@@ -247,16 +207,12 @@ func (c *cases) DeactivateNationality(ctx context.Context, id string) error {
 	nationality.IsActive = false
 	nationality.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateNationality(ctx, nationality); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateNationality(ctx, nationality)
 }
 
 // DeactivatePosition implements Cases.
 func (c *cases) DeactivatePosition(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	position, err := c.repository.GetPositionById(ctx, objID)
 
 	if err != nil {
@@ -266,16 +222,12 @@ func (c *cases) DeactivatePosition(ctx context.Context, id string) error {
 	position.IsActive = false
 	position.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdatePosition(ctx, position); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdatePosition(ctx, position)
 }
 
 // DeactivateSupervisor implements Cases.
 func (c *cases) DeactivateSupervisor(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	supervisor, err := c.repository.GetSupervisorById(ctx, objID)
 
 	if err != nil {
@@ -285,16 +237,12 @@ func (c *cases) DeactivateSupervisor(ctx context.Context, id string) error {
 	supervisor.IsActive = false
 	supervisor.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateSupervisor(ctx, supervisor); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateSupervisor(ctx, supervisor)
 }
 
 // DeleteEmployee implements Cases.
 func (c *cases) DeleteEmployee(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	employee, err := c.repository.GetEmployeeById(ctx, objID)
 
 	if err != nil {
@@ -305,16 +253,12 @@ func (c *cases) DeleteEmployee(ctx context.Context, id string) error {
 	employee.UpdatedAt = time.Now()
 	employee.DeleteAt = time.Now()
 
-	if err := c.repository.UpdateEmployee(ctx, employee); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateEmployee(ctx, employee)
 }
 
 // DeleteNationality implements Cases.
 func (c *cases) DeleteNationality(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	nationality, err := c.repository.GetNationalityById(ctx, objID)
 
 	if err != nil {
@@ -325,16 +269,12 @@ func (c *cases) DeleteNationality(ctx context.Context, id string) error {
 	nationality.UpdatedAt = time.Now()
 	nationality.DeleteAt = time.Now()
 
-	if err := c.repository.UpdateNationality(ctx, nationality); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateNationality(ctx, nationality)
 }
 
 // DeletePosition implements Cases.
 func (c *cases) DeletePosition(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	position, err := c.repository.GetPositionById(ctx, objID)
 
 	if err != nil {
@@ -345,16 +285,12 @@ func (c *cases) DeletePosition(ctx context.Context, id string) error {
 	position.UpdatedAt = time.Now()
 	position.DeleteAt = time.Now()
 
-	if err := c.repository.UpdatePosition(ctx, position); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdatePosition(ctx, position)
 }
 
 // DeleteSupervisor implements Cases.
 func (c *cases) DeleteSupervisor(ctx context.Context, id string) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	supervisor, err := c.repository.GetSupervisorById(ctx, objID)
 
 	if err != nil {
@@ -365,129 +301,75 @@ func (c *cases) DeleteSupervisor(ctx context.Context, id string) error {
 	supervisor.UpdatedAt = time.Now()
 	supervisor.DeleteAt = time.Now()
 
-	if err := c.repository.UpdateSupervisor(ctx, supervisor); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateSupervisor(ctx, supervisor)
 }
 
 // GetEmployeeById implements Cases.
 func (c *cases) GetEmployeeById(ctx context.Context, id string) (*Employee, error) {
-	objID, err := primitive.ObjectIDFromHex(id)
-	employee, err := c.repository.GetEmployeeById(ctx, objID)
+	objID, _ := primitive.ObjectIDFromHex(id)
 
-	if err != nil {
-		return nil, err
-	}
-
-	return employee, nil
+	return c.repository.GetEmployeeById(ctx, objID)
 }
 
 // GetEmployees implements Cases.
 func (c *cases) GetEmployees(ctx context.Context) ([]Employee, error) {
-	employees, err := c.repository.GetEmployees(ctx)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return employees, nil
+	return c.repository.GetEmployees(ctx)
 }
 
 // GetNationalities implements Cases.
 func (c *cases) GetNationalities(ctx context.Context) ([]Nationality, error) {
-	nationalities, err := c.repository.GetNationalities(ctx)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return nationalities, nil
+	return c.repository.GetNationalities(ctx)
 }
 
 // GetNationalityById implements Cases.
 func (c *cases) GetNationalityById(ctx context.Context, id string) (*Nationality, error) {
-	objID, err := primitive.ObjectIDFromHex(id)
-	nationality, err := c.repository.GetNationalityById(ctx, objID)
+	objID, _ := primitive.ObjectIDFromHex(id)
 
-	if err != nil {
-		return nil, err
-	}
-
-	return nationality, nil
+	return c.repository.GetNationalityById(ctx, objID)
 }
 
 // GetPositionById implements Cases.
 func (c *cases) GetPositionById(ctx context.Context, id string) (*Position, error) {
-	objID, err := primitive.ObjectIDFromHex(id)
-	position, err := c.repository.GetPositionById(ctx, objID)
+	objID, _ := primitive.ObjectIDFromHex(id)
 
-	if err != nil {
-		return nil, err
-	}
-
-	return position, nil
+	return c.repository.GetPositionById(ctx, objID)
 }
 
 // GetPositions implements Cases.
 func (c *cases) GetPositions(ctx context.Context) ([]Position, error) {
-	positions, err := c.repository.GetPositions(ctx)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return positions, nil
+	return c.repository.GetPositions(ctx)
 }
 
 // GetSupervisorById implements Cases.
 func (c *cases) GetSupervisorById(ctx context.Context, id string) (*Supervisor, error) {
-	objID, err := primitive.ObjectIDFromHex(id)
-	supervisor, err := c.repository.GetSupervisorById(ctx, objID)
+	objID, _ := primitive.ObjectIDFromHex(id)
 
-	if err != nil {
-		return nil, err
-	}
-
-	return supervisor, nil
+	return c.repository.GetSupervisorById(ctx, objID)
 }
 
 // GetSupervisors implements Cases.
 func (c *cases) GetSupervisors(ctx context.Context) ([]Supervisor, error) {
-	supervisors, err := c.repository.GetSupervisors(ctx)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return supervisors, nil
+	return c.repository.GetSupervisors(ctx)
 }
 
 // UpdateEmployee implements Cases.
 func (c *cases) UpdateEmployee(ctx context.Context, id string, employee *Employee) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	result, err := c.repository.GetEmployeeById(ctx, objID)
 
 	if err != nil {
 		return err
 	}
 
-	_, err = c.repository.GetSupervisorById(ctx, employee.Supervisor.ID)
-
-	if err != nil {
+	if _, err = c.repository.GetSupervisorById(ctx, employee.Supervisor.ID); err != nil {
 		return err
 	}
 
-	_, err = c.repository.GetPositionById(ctx, employee.Position.ID)
-
-	if err != nil {
+	if _, err = c.repository.GetPositionById(ctx, employee.Position.ID); err != nil {
 		return err
 	}
 
-	_, err = c.repository.GetNationalityById(ctx, employee.Nationality.ID)
-
-	if err != nil {
+	if _, err = c.repository.GetNationalityById(ctx, employee.Nationality.ID); err != nil {
 		return err
 	}
 
@@ -535,16 +417,12 @@ func (c *cases) UpdateEmployee(ctx context.Context, id string, employee *Employe
 
 	employee.Nationality.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateEmployee(ctx, result); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateEmployee(ctx, result)
 }
 
 // UpdateNationality implements Cases.
 func (c *cases) UpdateNationality(ctx context.Context, id string, nationality *Nationality) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	result, err := c.repository.GetNationalityById(ctx, objID)
 
 	if err != nil {
@@ -557,16 +435,12 @@ func (c *cases) UpdateNationality(ctx context.Context, id string, nationality *N
 
 	result.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateNationality(ctx, result); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateNationality(ctx, result)
 }
 
 // UpdatePosition implements Cases.
 func (c *cases) UpdatePosition(ctx context.Context, id string, position *Position) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	result, err := c.repository.GetPositionById(ctx, objID)
 
 	if err != nil {
@@ -579,16 +453,12 @@ func (c *cases) UpdatePosition(ctx context.Context, id string, position *Positio
 
 	result.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdatePosition(ctx, result); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdatePosition(ctx, result)
 }
 
 // UpdateSupervisor implements Cases.
 func (c *cases) UpdateSupervisor(ctx context.Context, id string, supervisor *Supervisor) error {
-	objID, err := primitive.ObjectIDFromHex(id)
+	objID, _ := primitive.ObjectIDFromHex(id)
 	result, err := c.repository.GetSupervisorById(ctx, objID)
 
 	if err != nil {
@@ -601,9 +471,5 @@ func (c *cases) UpdateSupervisor(ctx context.Context, id string, supervisor *Sup
 
 	result.UpdatedAt = time.Now()
 
-	if err := c.repository.UpdateSupervisor(ctx, result); err != nil {
-		return err
-	}
-
-	return nil
+	return c.repository.UpdateSupervisor(ctx, result)
 }
