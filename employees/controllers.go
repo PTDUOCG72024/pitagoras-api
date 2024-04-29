@@ -116,7 +116,7 @@ func (c *controller) ActivateSupervisor(ctx *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param employee body CreateEmployeeRequest true "Employee object that needs to be created"
-// @Success 200 {object} CreateEmployeeResponse
+// @Success 201 {object} CreateEmployeeResponse
 // @Failure 400 {string} string "Error validando el cuerpo de la petición"
 // @Failure 500 {string} string "Error creando el empleado"
 // @Router /employees [post]
@@ -145,7 +145,7 @@ func (c *controller) CreateEmployee(ctx *fiber.Ctx) error {
 	result, err := c.cases.CreateEmployee(ctx.UserContext(), employee)
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Error creando el empleado",
+			"message": err.Error(),
 		})
 	}
 
@@ -201,7 +201,7 @@ func (c *controller) CreateNationality(ctx *fiber.Ctx) error {
 
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Error creando la nacionalidad",
+			"message": err.Error(),
 		})
 	}
 
@@ -247,7 +247,7 @@ func (c *controller) CreatePosition(ctx *fiber.Ctx) error {
 
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Error creando el cargo",
+			"message": err.Error(),
 		})
 	}
 
@@ -293,7 +293,7 @@ func (c *controller) CreateSupervisor(ctx *fiber.Ctx) error {
 
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"message": "Error creando el supervisor",
+			"message": err.Error(),
 		})
 	}
 

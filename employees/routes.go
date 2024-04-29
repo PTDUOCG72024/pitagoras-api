@@ -11,14 +11,14 @@ var repo Repository
 var ctrl Controller
 var cs Cases
 
-func bootstrap(logger *zap.Logger, mongoCollection *mongo.Collection) {
-	repo = NewRepository(logger, mongoCollection)
+func bootstrap(logger *zap.Logger, employeesCollection *mongo.Collection, nationalitiesCollection *mongo.Collection, positionsCollection *mongo.Collection, supervisorsCollection *mongo.Collection) {
+	repo = NewRepository(logger, employeesCollection, nationalitiesCollection, positionsCollection, supervisorsCollection)
 	cs = NewCases(logger, repo)
 	ctrl = NewController(cs)
 }
 
-func ApplyRoutes(app *fiber.App, logger *zap.Logger, mongoCollection *mongo.Collection) {
-	bootstrap(logger, mongoCollection)
+func ApplyRoutes(app *fiber.App, logger *zap.Logger, employeesCollection *mongo.Collection, nationalitiesCollection *mongo.Collection, positionsCollection *mongo.Collection, supervisorsCollection *mongo.Collection) {
+	bootstrap(logger, employeesCollection, nationalitiesCollection, positionsCollection, supervisorsCollection)
 	group := app.Group("/employees", utils.GetNextMiddleWare)
 	group.Post("/", ctrl.CreateEmployee)                  // Create a new employee
 	group.Get("/:id", ctrl.GetEmployeeById)               // Get an employee by id

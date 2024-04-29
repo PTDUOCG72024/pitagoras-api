@@ -28,6 +28,9 @@ var client *mongo.Client
 var usersCollection *mongo.Collection
 var projectsCollection *mongo.Collection
 var employeesCollection *mongo.Collection
+var nationalitiesCollection *mongo.Collection
+var positionsCollection *mongo.Collection
+var supervisorsCollection *mongo.Collection
 
 var zapLogger *zap.Logger
 
@@ -60,6 +63,9 @@ func init() {
 	usersCollection = client.Database(dbName).Collection(os.Getenv("MONGO_USERS_COLLECTION_NAME"))
 	projectsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_PROJECTS_COLLECTION_NAME"))
 	employeesCollection = client.Database(dbName).Collection(os.Getenv("MONGO_EMPLOYEES_COLLECTION_NAME"))
+	nationalitiesCollection = client.Database(dbName).Collection(os.Getenv("MONGO_NATIONALITIES_COLLECTION_NAME"))
+	positionsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_POSITIONS_COLLECTION_NAME"))
+	supervisorsCollection = client.Database(dbName).Collection(os.Getenv("MONGO_SUPERVISORS_COLLECTION_NAME"))
 	zapLogger.Info("MongoDB initialized")
 }
 
@@ -87,7 +93,7 @@ func main() {
 
 	users.ApplyRoutes(app, zapLogger, usersCollection)
 	projects.ApplyRoutes(app, zapLogger, projectsCollection)
-	employees.ApplyRoutes(app, zapLogger, employeesCollection)
+	employees.ApplyRoutes(app, zapLogger, employeesCollection, nationalitiesCollection, positionsCollection, supervisorsCollection)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }

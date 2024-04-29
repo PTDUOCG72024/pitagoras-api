@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/gofiber/fiber/v2"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Controller interface {
@@ -77,26 +78,26 @@ type Cases interface {
 type Repository interface {
 	CreateEmployee(ctx context.Context, employee *Employee) (*Employee, error)
 	UpdateEmployee(ctx context.Context, employee *Employee) error
-	GetEmployeeById(ctx context.Context, id string) (*Employee, error)
+	GetEmployeeById(ctx context.Context, id primitive.ObjectID) (*Employee, error)
 	GetEmployeeByEmail(ctx context.Context, email string) (*Employee, error)
 	GetEmployeeByIdentificationNumber(ctx context.Context, identificationNumber string) (*Employee, error)
 	GetEmployees(ctx context.Context) ([]Employee, error)
 
 	CreateSupervisor(ctx context.Context, supervisor *Supervisor) (*Supervisor, error)
 	UpdateSupervisor(ctx context.Context, supervisor *Supervisor) error
-	GetSupervisorById(ctx context.Context, id string) (*Supervisor, error)
+	GetSupervisorById(ctx context.Context, id primitive.ObjectID) (*Supervisor, error)
 	GetSupervisorByName(ctx context.Context, name string) (*Supervisor, error)
 	GetSupervisors(ctx context.Context) ([]Supervisor, error)
 
 	CreatePosition(ctx context.Context, position *Position) (*Position, error)
 	UpdatePosition(ctx context.Context, position *Position) error
-	GetPositionById(ctx context.Context, id string) (*Position, error)
+	GetPositionById(ctx context.Context, id primitive.ObjectID) (*Position, error)
 	GetPositionByName(ctx context.Context, name string) (*Position, error)
 	GetPositions(ctx context.Context) ([]Position, error)
 
 	CreateNationality(ctx context.Context, nationality *Nationality) (*Nationality, error)
 	UpdateNationality(ctx context.Context, nationality *Nationality) error
-	GetNationalityById(ctx context.Context, id string) (*Nationality, error)
+	GetNationalityById(ctx context.Context, id primitive.ObjectID) (*Nationality, error)
 	GetNationalityByName(ctx context.Context, name string) (*Nationality, error)
 	GetNationalities(ctx context.Context) ([]Nationality, error)
 }
