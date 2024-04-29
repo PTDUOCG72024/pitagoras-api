@@ -110,7 +110,7 @@ func main() {
 	users.ApplyRoutes(app, zapLogger, usersCollection)
 	projects.ApplyRoutes(app, zapLogger, projectsCollection)
 	employees.ApplyRoutes(app, zapLogger, employeesCollection, nationalitiesCollection, positionsCollection, supervisorsCollection)
-	accidents.ApplyRoutes(app, zapLogger, accidentsCollection, classificationsCollection, gravitiesCollection, injuredPartsCollection, projectsCollection, employeesCollection)
+	accidents.ApplyRoutes(app, zapLogger, accidentsCollection, classificationsCollection, gravitiesCollection, injuredPartsCollection, employeesCollection, projectsCollection)
 
 	app.Listen(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
