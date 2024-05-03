@@ -489,7 +489,28 @@ func (c *controller) GetAccidentById(ctx *fiber.Ctx) error {
 // @Failure 500 {string} string "Error obteniendo los accidentes"
 // @Router /accidents/ [get]
 func (c *controller) GetAccidents(ctx *fiber.Ctx) error {
-	result, err := c.cases.GetAccidents(ctx.Context())
+	// Get params from url. e.g. /accidents?start_date=2021-01-01&end_date=2021-01-31&project_id=df21sd1f23sdf&gravity_id=1&classification_id=1&injured_part_id=1&employee_id=1
+	startDate := ctx.Query("start_date")
+	endDate := ctx.Query("end_date")
+	accidentDate := ctx.Query("accident_date")
+	projectID := ctx.Query("project_id")
+	gravityID := ctx.Query("gravity_id")
+	classificationID := ctx.Query("classification_id")
+	injuredPartID := ctx.Query("injured_part_id")
+	employeeID := ctx.Query("employee_id")
+
+	query := GetAccidentsQuery{
+		StartDate:        startDate,
+		EndDate:          endDate,
+		AccidentDate:     accidentDate,
+		ProjectID:        projectID,
+		GravityID:        gravityID,
+		ClassificationID: classificationID,
+		InjuredPartID:    injuredPartID,
+		EmployeeID:       employeeID,
+	}
+
+	result, err := c.cases.GetAccidents(ctx.Context(), query)
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": "Error obteniendo los accidentes",

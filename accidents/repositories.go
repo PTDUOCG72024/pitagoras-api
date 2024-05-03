@@ -102,8 +102,63 @@ func (r *repository) GetAccidentById(ctx context.Context, id primitive.ObjectID)
 }
 
 // GetAccidents implements Repository.
-func (r *repository) GetAccidents(ctx context.Context) ([]Accident, error) {
-	cursor, err := r.accidentsCollection.Find(ctx, primitive.M{})
+func (r *repository) GetAccidents(ctx context.Context, query GetAccidentsQuery) ([]Accident, error) {
+	filter := primitive.M{}
+	if query.AccidentDate != "" {
+		filter["accident_date"] = query.AccidentDate
+	}
+
+	if query.ProjectID != "" {
+		projectID, err := primitive.ObjectIDFromHex(query.ProjectID)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["project._id"] = projectID
+	}
+
+	if query.GravityID != "" {
+		gravityID, err := primitive.ObjectIDFromHex(query.GravityID)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["gravity._id"] = gravityID
+	}
+
+	if query.ClassificationID != "" {
+		classificationID, err := primitive.ObjectIDFromHex(query.ClassificationID)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["classification._id"] = classificationID
+	}
+
+	if query.InjuredPartID != "" {
+		injuredPartID, err := primitive.ObjectIDFromHex(query.InjuredPartID)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["injured_part._id"] = injuredPartID
+	}
+
+	if query.EmployeeID != "" {
+		employeeID, err := primitive.ObjectIDFromHex(query.EmployeeID)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["employee._id"] = employeeID
+	}
+
+	cursor, err := r.accidentsCollection.Find(ctx, filter)
 	if err != nil {
 		r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
 		return nil, err

@@ -44,7 +44,7 @@ type Controller interface {
 type Cases interface {
 	CreateAccident(ctx context.Context, accident *Accident) (*Accident, error)
 	GetAccidentById(ctx context.Context, id string) (*Accident, error)
-	GetAccidents(ctx context.Context) ([]Accident, error)
+	GetAccidents(ctx context.Context, query GetAccidentsQuery) ([]Accident, error)
 	UpdateAccident(ctx context.Context, id string, accident *Accident) error
 	DeleteAccident(ctx context.Context, id string) error
 
@@ -76,7 +76,7 @@ type Cases interface {
 type Repository interface {
 	CreateAccident(ctx context.Context, accident *Accident) (*Accident, error)
 	GetAccidentById(ctx context.Context, id primitive.ObjectID) (*Accident, error)
-	GetAccidents(ctx context.Context) ([]Accident, error)
+	GetAccidents(ctx context.Context, query GetAccidentsQuery) ([]Accident, error)
 	UpdateAccident(ctx context.Context, accident *Accident) error
 
 	CreateClassification(ctx context.Context, classification *Classification) (*Classification, error)

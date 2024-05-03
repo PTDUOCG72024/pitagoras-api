@@ -262,8 +262,8 @@ func (c *cases) GetAccidentById(ctx context.Context, id string) (*Accident, erro
 }
 
 // GetAccidents implements Cases.
-func (c *cases) GetAccidents(ctx context.Context) ([]Accident, error) {
-	return c.repository.GetAccidents(ctx)
+func (c *cases) GetAccidents(ctx context.Context, query GetAccidentsQuery) ([]Accident, error) {
+	return c.repository.GetAccidents(ctx, query)
 }
 
 // GetClassificationById implements Cases.
