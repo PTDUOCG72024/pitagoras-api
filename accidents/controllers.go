@@ -492,7 +492,6 @@ func (c *controller) GetAccidents(ctx *fiber.Ctx) error {
 	// Get params from url. e.g. /accidents?start_date=2021-01-01&end_date=2021-01-31&project_id=df21sd1f23sdf&gravity_id=1&classification_id=1&injured_part_id=1&employee_id=1
 	startDate := ctx.Query("start_date")
 	endDate := ctx.Query("end_date")
-	accidentDate := ctx.Query("accident_date")
 	projectID := ctx.Query("project_id")
 	gravityID := ctx.Query("gravity_id")
 	classificationID := ctx.Query("classification_id")
@@ -502,7 +501,6 @@ func (c *controller) GetAccidents(ctx *fiber.Ctx) error {
 	query := GetAccidentsQuery{
 		StartDate:        startDate,
 		EndDate:          endDate,
-		AccidentDate:     accidentDate,
 		ProjectID:        projectID,
 		GravityID:        gravityID,
 		ClassificationID: classificationID,

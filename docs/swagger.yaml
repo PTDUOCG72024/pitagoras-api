@@ -995,6 +995,172 @@ paths:
       summary: register new user
       tags:
       - users
+  /auth/user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get user by id
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserResponse'
+        "400":
+          description: Usuario no existe
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error obteniendo el usuario
+          schema:
+            type: string
+      summary: get user by id
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: update user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: UserUpdateRequest
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Usuario actualizado correctamente
+          schema:
+            type: string
+        "400":
+          description: Usuario no existe
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error actualizando el usuario
+          schema:
+            type: string
+      summary: update user
+      tags:
+      - users
+  /auth/user/activate/{id}:
+    put:
+      consumes:
+      - application/json
+      description: activate user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Usuario activado correctamente
+          schema:
+            type: string
+        "400":
+          description: Usuario no existe
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error activando el usuario
+          schema:
+            type: string
+      summary: activate user
+      tags:
+      - users
+  /auth/user/deactivate/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deactivate user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Usuario desactivado correctamente
+          schema:
+            type: string
+        "400":
+          description: Usuario no existe
+          schema:
+            type: string
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error eliminando el usuario
+          schema:
+            type: string
+      summary: deactivate user
+      tags:
+      - users
+  /auth/user/email/{email}:
+    get:
+      consumes:
+      - application/json
+      description: get user by email
+      parameters:
+      - description: User Email
+        in: path
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.UserResponse'
+        "404":
+          description: El usuario no existe
+          schema:
+            type: string
+        "500":
+          description: Error obteniendo el usuario
+          schema:
+            type: string
+      summary: get user by email
+      tags:
+      - users
   /classifications/:
     get:
       consumes:
@@ -2453,170 +2619,4 @@ paths:
       summary: Deactivate a supervisor
       tags:
       - supervisors
-  /users/{id}:
-    get:
-      consumes:
-      - application/json
-      description: get user by id
-      parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/users.UserResponse'
-        "400":
-          description: Usuario no existe
-          schema:
-            type: string
-        "404":
-          description: El usuario no existe
-          schema:
-            type: string
-        "500":
-          description: Error obteniendo el usuario
-          schema:
-            type: string
-      summary: get user by id
-      tags:
-      - users
-    put:
-      consumes:
-      - application/json
-      description: update user
-      parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: UserUpdateRequest
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/users.UserUpdateRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Usuario actualizado correctamente
-          schema:
-            type: string
-        "400":
-          description: Usuario no existe
-          schema:
-            type: string
-        "404":
-          description: El usuario no existe
-          schema:
-            type: string
-        "500":
-          description: Error actualizando el usuario
-          schema:
-            type: string
-      summary: update user
-      tags:
-      - users
-  /users/activate/{id}:
-    put:
-      consumes:
-      - application/json
-      description: activate user
-      parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Usuario activado correctamente
-          schema:
-            type: string
-        "400":
-          description: Usuario no existe
-          schema:
-            type: string
-        "404":
-          description: El usuario no existe
-          schema:
-            type: string
-        "500":
-          description: Error activando el usuario
-          schema:
-            type: string
-      summary: activate user
-      tags:
-      - users
-  /users/deactivate/{id}:
-    put:
-      consumes:
-      - application/json
-      description: deactivate user
-      parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Usuario desactivado correctamente
-          schema:
-            type: string
-        "400":
-          description: Usuario no existe
-          schema:
-            type: string
-        "404":
-          description: El usuario no existe
-          schema:
-            type: string
-        "500":
-          description: Error eliminando el usuario
-          schema:
-            type: string
-      summary: deactivate user
-      tags:
-      - users
-  /users/email/{email}:
-    get:
-      consumes:
-      - application/json
-      description: get user by email
-      parameters:
-      - description: User Email
-        in: path
-        name: email
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/users.UserResponse'
-        "404":
-          description: El usuario no existe
-          schema:
-            type: string
-        "500":
-          description: Error obteniendo el usuario
-          schema:
-            type: string
-      summary: get user by email
-      tags:
-      - users
 swagger: "2.0"

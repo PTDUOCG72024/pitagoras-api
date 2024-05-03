@@ -33,19 +33,9 @@ type CreateAccidentResponse struct {
 	CreatedAt        time.Time          `json:"created_at"`
 }
 
-/*
-	startDate := ctx.Query("start_date")
-	endDate := ctx.Query("end_date")
-	projectID := ctx.Query("project_id")
-	gravityID := ctx.Query("gravity_id")
-	classificationID := ctx.Query("classification_id")
-	injuredPartID := ctx.Query("injured_part_id")
-*/
-
 type GetAccidentsQuery struct {
 	StartDate        string `json:"start_date"`
 	EndDate          string `json:"end_date"`
-	AccidentDate     string `json:"accident_date"`
 	ProjectID        string `json:"project_id"`
 	GravityID        string `json:"gravity_id"`
 	ClassificationID string `json:"classification_id"`

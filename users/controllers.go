@@ -147,7 +147,7 @@ func (c *controller) Login(ctx *fiber.Ctx) error {
 //	@Failure		400 {string} string "Usuario no existe"
 //	@Failure		404 {string} string "El usuario no existe"
 //	@Failure		500 {string} string "Error obteniendo el usuario"
-//	@Router			/users/{id} [get]
+//	@Router			/auth/user/{id} [get]
 func (c *controller) GetUserById(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 	userResult, err := c.cases.GetUserById(ctx.UserContext(), id)
@@ -193,7 +193,7 @@ func (c *controller) GetUserById(ctx *fiber.Ctx) error {
 //	@Success		200 {object} UserResponse
 //	@Failure		404 {string} string "El usuario no existe"
 //	@Failure		500 {string} string "Error obteniendo el usuario"
-//	@Router			/users/email/{email} [get]
+//	@Router			/auth/user/email/{email} [get]
 func (c *controller) GetUserByEmail(ctx *fiber.Ctx) error {
 	email := ctx.Params("email")
 
@@ -235,7 +235,7 @@ func (c *controller) GetUserByEmail(ctx *fiber.Ctx) error {
 //	@Failure		400 {string} string "Usuario no existe"
 //	@Failure		404 {string} string "El usuario no existe"
 //	@Failure		500 {string} string "Error eliminando el usuario"
-//	@Router			/users/deactivate/{id} [put]
+//	@Router			/auth/user/deactivate/{id} [delete]
 func (c *controller) Deactivate(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 
@@ -275,7 +275,7 @@ func (c *controller) Deactivate(ctx *fiber.Ctx) error {
 //	@Failure		400 {string} string "Usuario no existe"
 //	@Failure		404 {string} string "El usuario no existe"
 //	@Failure		500 {string} string "Error activando el usuario"
-//	@Router			/users/activate/{id} [put]
+//	@Router			/auth/user/activate/{id} [put]
 func (c *controller) Activate(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 
@@ -316,7 +316,7 @@ func (c *controller) Activate(ctx *fiber.Ctx) error {
 //	@Failure		400 {string} string "Usuario no existe"
 //	@Failure		404 {string} string "El usuario no existe"
 //	@Failure		500 {string} string "Error actualizando el usuario"
-//	@Router			/users/{id} [put]
+//	@Router			/auth/user/{id} [put]
 func (c *controller) Update(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 	requestBody := new(UserUpdateRequest)

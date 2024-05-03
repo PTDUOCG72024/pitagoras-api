@@ -2,6 +2,7 @@ package accidents
 
 import (
 	"context"
+	"time"
 
 	"github.com/xbizzybone/pitagoras-api/employees"
 	"github.com/xbizzybone/pitagoras-api/projects"
@@ -104,8 +105,22 @@ func (r *repository) GetAccidentById(ctx context.Context, id primitive.ObjectID)
 // GetAccidents implements Repository.
 func (r *repository) GetAccidents(ctx context.Context, query GetAccidentsQuery) ([]Accident, error) {
 	filter := primitive.M{}
-	if query.AccidentDate != "" {
-		filter["accident_date"] = query.AccidentDate
+	if query.StartDate != "" {
+		date, err := time.Parse("2006-01-02", query.StartDate)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+		filter["accident_date"] = primitive.M{"$gte": date}
+	}
+
+	if query.EndDate != "" {
+		date, err := time.Parse("2006-01-02", query.EndDate)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+		filter["accident_date"] = primitive.M{"$lte": date}
 	}
 
 	if query.ProjectID != "" {

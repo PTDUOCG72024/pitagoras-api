@@ -331,6 +331,257 @@ const docTemplate = `{
                 }
             }
         },
+        "/auth/user/activate/{id}": {
+            "put": {
+                "description": "activate user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "activate user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario activado correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "El usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error activando el usuario",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/user/deactivate/{id}": {
+            "delete": {
+                "description": "deactivate user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "deactivate user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario desactivado correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "El usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error eliminando el usuario",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/user/email/{email}": {
+            "get": {
+                "description": "get user by email",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "get user by email",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User Email",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/users.UserResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "El usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo el usuario",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/user/{id}": {
+            "get": {
+                "description": "get user by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "get user by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/users.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "El usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error obteniendo el usuario",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "update user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "update user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "UserUpdateRequest",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users.UserUpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario actualizado correctamente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "El usuario no existe",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Error actualizando el usuario",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/classifications/": {
             "get": {
                 "description": "Get all classifications",
@@ -2531,257 +2782,6 @@ const docTemplate = `{
                     },
                     "500": {
                         "description": "Error eliminando el supervisor",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/activate/{id}": {
-            "put": {
-                "description": "activate user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "users"
-                ],
-                "summary": "activate user",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Usuario activado correctamente",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "Usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "El usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Error activando el usuario",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/deactivate/{id}": {
-            "put": {
-                "description": "deactivate user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "users"
-                ],
-                "summary": "deactivate user",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Usuario desactivado correctamente",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "Usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "El usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Error eliminando el usuario",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/email/{email}": {
-            "get": {
-                "description": "get user by email",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "users"
-                ],
-                "summary": "get user by email",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User Email",
-                        "name": "email",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/users.UserResponse"
-                        }
-                    },
-                    "404": {
-                        "description": "El usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Error obteniendo el usuario",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{id}": {
-            "get": {
-                "description": "get user by id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "users"
-                ],
-                "summary": "get user by id",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/users.UserResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "El usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Error obteniendo el usuario",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "description": "update user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "users"
-                ],
-                "summary": "update user",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "UserUpdateRequest",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/users.UserUpdateRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Usuario actualizado correctamente",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "Usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "404": {
-                        "description": "El usuario no existe",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Error actualizando el usuario",
                         "schema": {
                             "type": "string"
                         }
