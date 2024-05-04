@@ -485,6 +485,17 @@ func (c *controller) GetAccidentById(ctx *fiber.Ctx) error {
 // @Tags accidents
 // @Accept json
 // @Produce json
+// @Param start_date query string false "Start date"
+// @Param end_date query string false "End date"
+// @Param employee_start_date query string false "Employee start date"
+// @Param employee_end_date query string false "Employee end date"
+// @Param employee_birth_date_start query string false "Employee birth date start"
+// @Param employee_birth_date_end query string false "Employee birth date end"
+// @Param project_id query string false "Project ID"
+// @Param gravity_id query string false "Gravity ID"
+// @Param classification_id query string false "Classification ID"
+// @Param injured_part_id query string false "Injured Part ID"
+// @Param employee_id query string false "Employee ID"
 // @Success 200 {object} GetAccidentByIdResponse "Accidentes obtenidos correctamente"
 // @Failure 500 {string} string "Error obteniendo los accidentes"
 // @Router /accidents/ [get]
@@ -492,6 +503,10 @@ func (c *controller) GetAccidents(ctx *fiber.Ctx) error {
 	// Get params from url. e.g. /accidents?start_date=2021-01-01&end_date=2021-01-31&project_id=df21sd1f23sdf&gravity_id=1&classification_id=1&injured_part_id=1&employee_id=1
 	startDate := ctx.Query("start_date")
 	endDate := ctx.Query("end_date")
+	employeeStartDate := ctx.Query("employee_start_date")
+	employeeEndDate := ctx.Query("employee_end_date")
+	employeeBirthDateStart := ctx.Query("employee_birth_date_start")
+	employeeBirthDateEnd := ctx.Query("employee_birth_date_end")
 	projectID := ctx.Query("project_id")
 	gravityID := ctx.Query("gravity_id")
 	classificationID := ctx.Query("classification_id")
@@ -499,13 +514,17 @@ func (c *controller) GetAccidents(ctx *fiber.Ctx) error {
 	employeeID := ctx.Query("employee_id")
 
 	query := GetAccidentsQuery{
-		StartDate:        startDate,
-		EndDate:          endDate,
-		ProjectID:        projectID,
-		GravityID:        gravityID,
-		ClassificationID: classificationID,
-		InjuredPartID:    injuredPartID,
-		EmployeeID:       employeeID,
+		StartDate:              startDate,
+		EndDate:                endDate,
+		EmployeeStartDate:      employeeStartDate,
+		EmployeeEndDate:        employeeEndDate,
+		EmployeeBirthDateStart: employeeBirthDateStart,
+		EmployeeBirthDateEnd:   employeeBirthDateEnd,
+		ProjectID:              projectID,
+		GravityID:              gravityID,
+		ClassificationID:       classificationID,
+		InjuredPartID:          injuredPartID,
+		EmployeeID:             employeeID,
 	}
 
 	result, err := c.cases.GetAccidents(ctx.Context(), query)
@@ -901,5 +920,17 @@ func (c *controller) UpdateInjuredPart(ctx *fiber.Ctx) error {
 
 	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "Parte lesionada actualizada correctamente",
+	})
+}
+
+func (c *controller) UpdateAllAccidentsEmployee(ctx *fiber.Ctx) error {
+	if err := c.cases.UpdateAllAccidentsEmployee(ctx.Context()); err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Error actualizando los accidentes del empleado",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "Accidentes actualizados correctamente",
 	})
 }

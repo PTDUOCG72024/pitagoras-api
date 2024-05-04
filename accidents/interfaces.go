@@ -39,6 +39,8 @@ type Controller interface {
 	DeleteInjuredPart(ctx *fiber.Ctx) error
 	ActivateInjuredPart(ctx *fiber.Ctx) error
 	DeactivateInjuredPart(ctx *fiber.Ctx) error
+
+	UpdateAllAccidentsEmployee(ctx *fiber.Ctx) error
 }
 
 type Cases interface {
@@ -71,6 +73,8 @@ type Cases interface {
 	DeleteInjuredPart(ctx context.Context, id string) error
 	ActivateInjuredPart(ctx context.Context, id string) error
 	DeactivateInjuredPart(ctx context.Context, id string) error
+
+	UpdateAllAccidentsEmployee(ctx context.Context) error
 }
 
 type Repository interface {

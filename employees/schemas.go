@@ -13,6 +13,7 @@ type CreateEmployeeRequest struct {
 	Email                string             `json:"email"`
 	InLaw                bool               `json:"in_law"`
 	ContractType         string             `json:"contract_type"`
+	BirthDate            time.Time          `bson:"birth_date,omitempty" json:"birth_date"`
 	StartDate            time.Time          `json:"start_date"`
 	EndDate              time.Time          `json:"end_date"`
 	SupervisorID         primitive.ObjectID `json:"supervisor_id"`
@@ -28,6 +29,7 @@ type CreateEmployeeResponse struct {
 	Email                string             `json:"email"`
 	InLaw                bool               `json:"in_law"`
 	ContractType         string             `json:"contract_type"`
+	BirthDate            time.Time          `bson:"birth_date,omitempty" json:"birth_date"`
 	StartDate            time.Time          `json:"start_date"`
 	EndDate              time.Time          `json:"end_date"`
 	IsActive             bool               `json:"is_active"`
@@ -45,6 +47,7 @@ type UpdateEmployeeRequest struct {
 	Email                string             `json:"email"`
 	InLaw                bool               `json:"in_law"`
 	ContractType         string             `json:"contract_type"`
+	BirthDate            time.Time          `bson:"birth_date,omitempty" json:"birth_date"`
 	StartDate            time.Time          `json:"start_date"`
 	EndDate              time.Time          `json:"end_date"`
 	SupervisorID         primitive.ObjectID `json:"supervisor_id"`
@@ -60,6 +63,7 @@ type UpdateEmployeeResponse struct {
 	Email                string             `json:"email"`
 	InLaw                bool               `json:"in_law"`
 	ContractType         string             `json:"contract_type"`
+	BirthDate            time.Time          `bson:"birth_date,omitempty" json:"birth_date"`
 	StartDate            time.Time          `json:"start_date"`
 	EndDate              time.Time          `json:"end_date"`
 	IsActive             bool               `json:"is_active"`
@@ -154,6 +158,7 @@ type GetEmployeeResponse struct {
 	Email                string             `json:"email"`
 	InLaw                bool               `json:"in_law"`
 	ContractType         string             `json:"contract_type"`
+	BirthDate            time.Time          `bson:"birth_date,omitempty" json:"birth_date"`
 	StartDate            time.Time          `json:"start_date"`
 	EndDate              time.Time          `json:"end_date"`
 	IsActive             bool               `json:"is_active"`

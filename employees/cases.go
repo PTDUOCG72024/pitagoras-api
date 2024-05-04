@@ -361,16 +361,40 @@ func (c *cases) UpdateEmployee(ctx context.Context, id string, employee *Employe
 		return err
 	}
 
-	if _, err = c.repository.GetSupervisorById(ctx, employee.Supervisor.ID); err != nil {
-		return err
+	if !employee.Supervisor.ID.IsZero() {
+		if _, err = c.repository.GetSupervisorById(ctx, employee.Supervisor.ID); err != nil {
+			return err
+		}
+
+		if employee.Supervisor.Name != result.Supervisor.Name {
+			result.Supervisor.Name = employee.Supervisor.Name
+		}
+
+		employee.Supervisor.UpdatedAt = time.Now()
 	}
 
-	if _, err = c.repository.GetPositionById(ctx, employee.Position.ID); err != nil {
-		return err
+	if !employee.Position.ID.IsZero() {
+		if _, err = c.repository.GetPositionById(ctx, employee.Position.ID); err != nil {
+			return err
+		}
+
+		if employee.Position.Name != result.Position.Name {
+			result.Position.Name = employee.Position.Name
+		}
+
+		employee.Position.UpdatedAt = time.Now()
 	}
 
-	if _, err = c.repository.GetNationalityById(ctx, employee.Nationality.ID); err != nil {
-		return err
+	if !employee.Nationality.ID.IsZero() {
+		if _, err = c.repository.GetNationalityById(ctx, employee.Nationality.ID); err != nil {
+			return err
+		}
+
+		if employee.Nationality.Name != result.Nationality.Name {
+			result.Nationality.Name = employee.Nationality.Name
+		}
+
+		employee.Nationality.UpdatedAt = time.Now()
 	}
 
 	if employee.Name != result.Name {
@@ -398,24 +422,6 @@ func (c *cases) UpdateEmployee(ctx context.Context, id string, employee *Employe
 	}
 
 	employee.UpdatedAt = time.Now()
-
-	if employee.Supervisor.Name != result.Supervisor.Name {
-		result.Supervisor.Name = employee.Supervisor.Name
-	}
-
-	employee.Supervisor.UpdatedAt = time.Now()
-
-	if employee.Position.Name != result.Position.Name {
-		result.Position.Name = employee.Position.Name
-	}
-
-	employee.Position.UpdatedAt = time.Now()
-
-	if employee.Nationality.Name != result.Nationality.Name {
-		result.Nationality.Name = employee.Nationality.Name
-	}
-
-	employee.Nationality.UpdatedAt = time.Now()
 
 	return c.repository.UpdateEmployee(ctx, result)
 }

@@ -36,6 +36,74 @@ const docTemplate = `{
                     "accidents"
                 ],
                 "summary": "Get all accidents",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Start date",
+                        "name": "start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "End date",
+                        "name": "end_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Employee start date",
+                        "name": "employee_start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Employee end date",
+                        "name": "employee_end_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Employee birth date start",
+                        "name": "employee_birth_date_start",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Employee birth date end",
+                        "name": "employee_birth_date_end",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Project ID",
+                        "name": "project_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Gravity ID",
+                        "name": "gravity_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Classification ID",
+                        "name": "classification_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Injured Part ID",
+                        "name": "injured_part_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Employee ID",
+                        "name": "employee_id",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Accidentes obtenidos correctamente",
@@ -3198,6 +3266,9 @@ const docTemplate = `{
         "employees.CreateEmployeeRequest": {
             "type": "object",
             "properties": {
+                "birth_date": {
+                    "type": "string"
+                },
                 "contract_type": {
                     "type": "string"
                 },
@@ -3236,6 +3307,9 @@ const docTemplate = `{
         "employees.CreateEmployeeResponse": {
             "type": "object",
             "properties": {
+                "birth_date": {
+                    "type": "string"
+                },
                 "contract_type": {
                     "type": "string"
                 },
@@ -3370,6 +3444,9 @@ const docTemplate = `{
         "employees.Employee": {
             "type": "object",
             "properties": {
+                "birth_date": {
+                    "type": "string"
+                },
                 "contract_type": {
                     "type": "string"
                 },
@@ -3428,6 +3505,9 @@ const docTemplate = `{
         "employees.GetEmployeeResponse": {
             "type": "object",
             "properties": {
+                "birth_date": {
+                    "type": "string"
+                },
                 "contract_type": {
                     "type": "string"
                 },
@@ -3646,6 +3726,9 @@ const docTemplate = `{
         "employees.UpdateEmployeeRequest": {
             "type": "object",
             "properties": {
+                "birth_date": {
+                    "type": "string"
+                },
                 "contract_type": {
                     "type": "string"
                 },

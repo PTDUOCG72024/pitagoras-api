@@ -34,13 +34,17 @@ type CreateAccidentResponse struct {
 }
 
 type GetAccidentsQuery struct {
-	StartDate        string `json:"start_date"`
-	EndDate          string `json:"end_date"`
-	ProjectID        string `json:"project_id"`
-	GravityID        string `json:"gravity_id"`
-	ClassificationID string `json:"classification_id"`
-	InjuredPartID    string `json:"injured_part_id"`
-	EmployeeID       string `json:"employee_id"`
+	StartDate              string `json:"start_date"`
+	EndDate                string `json:"end_date"`
+	EmployeeStartDate      string `json:"employee_start_date"`
+	EmployeeEndDate        string `json:"employee_end_date"`
+	EmployeeBirthDateStart string `json:"employee_birth_date"`
+	EmployeeBirthDateEnd   string `json:"employee_birth_date_end"`
+	ProjectID              string `json:"project_id"`
+	GravityID              string `json:"gravity_id"`
+	ClassificationID       string `json:"classification_id"`
+	InjuredPartID          string `json:"injured_part_id"`
+	EmployeeID             string `json:"employee_id"`
 }
 
 type UpdateAccidentRequest struct {

@@ -123,6 +123,46 @@ func (r *repository) GetAccidents(ctx context.Context, query GetAccidentsQuery) 
 		filter["accident_date"] = primitive.M{"$lte": date}
 	}
 
+	if query.EmployeeStartDate != "" {
+		date, err := time.Parse("2006-01-02", query.EmployeeStartDate)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["employee.start_date"] = primitive.M{"$gte": date}
+	}
+
+	if query.EmployeeEndDate != "" {
+		date, err := time.Parse("2006-01-02", query.EmployeeEndDate)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["employee.start_date"] = primitive.M{"$lte": date}
+	}
+
+	if query.EmployeeBirthDateStart != "" {
+		date, err := time.Parse("2006-01-02", query.EmployeeBirthDateStart)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["employee.birth_date"] = primitive.M{"$gte": date}
+	}
+
+	if query.EmployeeBirthDateEnd != "" {
+		date, err := time.Parse("2006-01-02", query.EmployeeBirthDateEnd)
+		if err != nil {
+			r.logger.Sugar().Errorw(err.Error(), "func", "GetAccidents", "request_id", ctx.Value("request_id"))
+			return nil, err
+		}
+
+		filter["employee.birth_date"] = primitive.M{"$lte": date}
+	}
+
 	if query.ProjectID != "" {
 		projectID, err := primitive.ObjectIDFromHex(query.ProjectID)
 		if err != nil {

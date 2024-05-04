@@ -418,3 +418,30 @@ func (c *cases) UpdateInjuredPart(ctx context.Context, id string, injuredPart *I
 
 	return c.repository.UpdateInjuredPart(ctx, result)
 }
+
+// UpdateAllAccidentsEmployee implements Cases.
+func (c *cases) UpdateAllAccidentsEmployee(ctx context.Context) error {
+	accidents, err := c.repository.GetAccidents(ctx, GetAccidentsQuery{})
+	if err != nil {
+		return err
+	}
+
+	for _, accident := range accidents {
+		//print accident json
+		c.logger.Info("accident", zap.Any("accident", accident))
+
+		employee, err := c.repository.GetEmployeeById(ctx, accident.Employee.ID)
+		if err != nil {
+			return err
+		}
+
+		accident.Employee = *employee
+
+		err = c.repository.UpdateAccident(ctx, &accident)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

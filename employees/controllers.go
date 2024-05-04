@@ -136,6 +136,7 @@ func (c *controller) CreateEmployee(ctx *fiber.Ctx) error {
 	employee.Email = requestBody.Email
 	employee.InLaw = requestBody.InLaw
 	employee.ContractType = requestBody.ContractType
+	employee.BirthDate = requestBody.BirthDate
 	employee.StartDate = requestBody.StartDate
 	employee.EndDate = requestBody.EndDate
 	employee.Supervisor.ID = requestBody.SupervisorID
@@ -157,6 +158,7 @@ func (c *controller) CreateEmployee(ctx *fiber.Ctx) error {
 	response.Email = result.Email
 	response.InLaw = result.InLaw
 	response.ContractType = result.ContractType
+	response.BirthDate = result.BirthDate
 	response.StartDate = result.StartDate
 	response.EndDate = result.EndDate
 	response.IsActive = result.IsActive
@@ -531,6 +533,7 @@ func (c *controller) GetEmployeeById(ctx *fiber.Ctx) error {
 	employeeResponse.Email = employee.Email
 	employeeResponse.InLaw = employee.InLaw
 	employeeResponse.ContractType = employee.ContractType
+	employeeResponse.BirthDate = employee.BirthDate
 	employeeResponse.StartDate = employee.StartDate
 	employeeResponse.EndDate = employee.EndDate
 	employeeResponse.IsActive = employee.IsActive
@@ -573,6 +576,7 @@ func (c *controller) GetEmployees(ctx *fiber.Ctx) error {
 		employeeResponse.Email = employee.Email
 		employeeResponse.InLaw = employee.InLaw
 		employeeResponse.ContractType = employee.ContractType
+		employeeResponse.BirthDate = employee.BirthDate
 		employeeResponse.StartDate = employee.StartDate
 		employeeResponse.EndDate = employee.EndDate
 		employeeResponse.IsActive = employee.IsActive
@@ -841,6 +845,7 @@ func (c *controller) UpdateEmployee(ctx *fiber.Ctx) error {
 	employee.Email = requestBody.Email
 	employee.InLaw = requestBody.InLaw
 	employee.ContractType = requestBody.ContractType
+	employee.BirthDate = requestBody.BirthDate
 	employee.StartDate = requestBody.StartDate
 	employee.EndDate = requestBody.EndDate
 	employee.Supervisor.ID = requestBody.SupervisorID

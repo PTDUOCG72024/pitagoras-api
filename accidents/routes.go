@@ -26,6 +26,8 @@ func ApplyRoutes(app *fiber.App, logger *zap.Logger, accidentsCollection *mongo.
 	group.Delete("/:id", ctrl.DeleteAccident) // Delete an accident
 	group.Get("/", ctrl.GetAccidents)         // Get all accidents
 
+	group.Put("/updates/update-all-employee", ctrl.UpdateAllAccidentsEmployee) // Update all accidents employee
+
 	group = app.Group("/classifications", utils.GetNextMiddleWare)
 	group.Post("/", ctrl.CreateClassification)                  // Create a new Classification
 	group.Get("/:id", ctrl.GetClassificationById)               // Get a Classification by id
