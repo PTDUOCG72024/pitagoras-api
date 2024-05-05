@@ -25,13 +25,6 @@ import (
 	_ "github.com/xbizzybone/pitagoras-api/docs"
 )
 
-/*
-MONGO_ACCIDENTS_COLLECTION_NAME=accidents
-MONGO_CLASIIFICATIONS_COLLECTION_NAME=classifications
-MONGO_GRAVITIES_COLLECTION_NAME=gravities
-MONGO_INJURIES_COLLECTION_NAME=injuries
-*/
-
 var client *mongo.Client
 var usersCollection *mongo.Collection
 var projectsCollection *mongo.Collection
